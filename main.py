@@ -78,7 +78,17 @@ MODELS = list(dict.fromkeys([m for m in CANDIDATE_MODELS if m]))
 MAX_IMAGE_BYTES = 25 * 1024 * 1024  # 25 MB
 MAX_PDF_BYTES = 14 * 1024 * 1024    # 14 MB
 
-gemini_client = genai.Client(api_key=GEMINI_API_KEY)
+def get_gemini_client() -> Optional[genai.Client]:
+    api_key = os.environ.get("GEMINI_API_KEY", "").strip() or GEMINI_API_KEY
+    if not api_key:
+        return None
+    try:
+        return genai.Client(api_key=api_key)
+    except Exception as e:
+        logger.error(f"Failed to initialize Gemini client: {e}")
+        return None
+
+gemini_client = get_gemini_client()
 
 # In-memory plain sessions dict for backwards compatibility (2-hour TTL)
 SESSIONS: Dict[str, Dict[str, Any]] = {}
@@ -635,12 +645,14 @@ async def analyze(
     )
 
     last_error = None
-    extraction_result = None
+    active_client = gemini_client or get_gemini_client()
+    if not active_client:
+        raise HTTPException(status_code=500, detail="GEMINI_API_KEY is not configured on the server.")
 
     for model_name in MODELS:
         try:
             logger.info(f"Attempting extraction using model: {model_name}")
-            resp = gemini_client.models.generate_content(
+            resp = active_client.models.generate_content(
                 model=model_name,
                 contents=content_parts,
                 config=gen_config,
@@ -792,9 +804,13 @@ SCHEDULE ROWS:
     full_prompt += f"\nPatient: {user_msg}\nMediPilot:"
 
     reply_text = None
+    active_client = gemini_client or get_gemini_client()
+    if not active_client:
+        raise HTTPException(status_code=500, detail="GEMINI_API_KEY is not configured on the server.")
+
     for model_name in MODELS:
         try:
-            resp = gemini_client.models.generate_content(
+            resp = active_client.models.generate_content(
                 model=model_name,
                 contents=full_prompt,
                 config=types.GenerateContentConfig(temperature=0.2, max_output_tokens=600),
