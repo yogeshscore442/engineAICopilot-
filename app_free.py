@@ -568,10 +568,17 @@ if FRONTEND_DIST.exists():
 
 
 if __name__ == "__main__":
+    import sys
+    if sys.platform == "win32":
+        try:
+            sys.stdout.reconfigure(encoding="utf-8")
+            sys.stderr.reconfigure(encoding="utf-8")
+        except Exception:
+            pass
     import uvicorn
     port = int(os.environ.get("PORT", 8080))
     print(f"\n=======================================================")
-    print(f"🚀 MediPilot Medical Reader & Copilot running on http://127.0.0.1:{port}")
+    print(f"[*] MediPilot Medical Reader & Copilot running on http://127.0.0.1:{port}")
     print(f"Primary model: {MODELS[0] if MODELS else 'default'}")
     print(f"=======================================================\n")
     uvicorn.run("app_free:app", host="127.0.0.1", port=port, reload=True)
