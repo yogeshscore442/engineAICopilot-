@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PQC Secure Communication Platform & Security Laboratory</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=2.5.2">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/quantum_flow.css') }}?v=2.5.2">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <!-- Modern Lucide Vector Icons (Local Offline High-Speed Bundle with CDN Fallback) -->
+    <script src="{{ url_for('static', filename='js/lucide.min.js') }}"></script>
+    <script>
+        if (!window.lucide) {
+            document.write('<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"><\/script>');
+        }
+    </script>
+    <!-- Three.js Hardware Accelerated WebGL Engine -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+    <!-- CINEMATIC 3D QUANTUM BREACH & ENTRY PORTAL (MODEL 5: WAVE TELEPORTATION) -->
+    <div id="quantum-login-portal">
+        <div class="quantum-flash-overlay" id="quantum-flash-overlay"></div>
+        <div class="quantum-grid-overlay"></div>
+        <div id="quantum-canvas-container"></div>
+
+        <!-- Minimal Holographic Cyber HUD -->
+        <div class="quantum-warp-hud">
+            <div class="quantum-warp-ring"></div>
+            <div class="quantum-warp-center">
+                <div class="quantum-warp-badge">
+                    <span class="quantum-pulse-dot"></span>
+                    <span>QUANTUM PORTAL BREACH SEQUENCE</span>
+                </div>
+                <div class="quantum-warp-title" id="quantum-warp-title">INITIATING TELEPORTATION MATRIX</div>
+                <div class="quantum-warp-spec" id="quantum-warp-spec">Bell State |Φ⁺⟩ Entanglement Active • 2048 Qubits • ML-KEM-768</div>
+                
+                <div class="quantum-warp-progress-box">
+                    <div class="quantum-warp-progress-bar" id="quantum-warp-bar"></div>
+                </div>
+                
+                <div class="quantum-warp-terminal" id="quantum-warp-terminal">
+                    > Synchronizing de Broglie wave interference...
+                </div>
+            </div>
+            <button type="button" class="quantum-warp-skip" id="quantum-warp-skip" title="Skip to Dashboard">
+                Skip to Dashboard <i data-lucide="chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- AUTHENTICATION VIEW -->
+    <div id="auth-section" class="auth-wrapper">
+        <!-- Top-Right Cyber Day/Night Theme Switcher -->
+        <div class="auth-top-actions">
+            <div class="cyber-theme-switch-wrap" id="auth-theme-toggle" title="Toggle Light / Dark Mode">
+                <div class="cyber-theme-pill">
+                    <span class="theme-icon-slot day-slot"><i data-lucide="sun"></i></span>
+                    <span class="theme-slider-thumb"></span>
+                    <span class="theme-icon-slot night-slot"><i data-lucide="moon"></i></span>
+                </div>
+                <span class="theme-mode-label">DARK</span>
+            </div>
+        </div>
+
+        <div class="auth-card">
+            <div class="auth-logo-badge"><i data-lucide="shield-check"></i> PQC PLATFORM</div>
+            <h1 class="auth-logo">PQC SECURE COMM</h1>
+            <p class="auth-subtitle">Post-Quantum Cryptography Chat, Mail & File Sharing Platform</p>
+            
+            <!-- Login -->
+            <div id="login-box">
+                <form id="login-form" onsubmit="if(window.handleLoginSubmit){window.handleLoginSubmit(event);return false;}">
+                    <div class="form-group">
+                        <label class="form-label" for="login-username">Username</label>
+                        <input class="form-input" type="text" id="login-username" required placeholder="e.g. alice">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="login-password">Password</label>
+                        <div class="password-input-wrapper">
+                            <input class="form-input" type="password" id="login-password" required placeholder="••••••••">
+                            <button type="button" class="password-toggle-btn" id="login-password-toggle" title="Show / Hide Password" aria-label="Toggle password visibility">
+                                <svg class="eye-icon eye-open" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                <svg class="eye-icon eye-closed" style="display:none;" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <button class="auth-btn" type="submit"><i data-lucide="lock" style="width:16px;height:16px;margin-right:6px;"></i> Log In to Secure Platform</button>
+                </form>
+
+                <div class="auth-toggle">
+                    Need an identity? <span id="toggle-to-register">Register new user</span>
+                </div>
+            </div>
+            
+            <!-- Register -->
+            <div id="register-box" style="display: none;">
+                <form id="register-form" onsubmit="if(window.handleRegisterSubmit){window.handleRegisterSubmit(event);return false;}">
+                    <div class="form-group">
+                        <label class="form-label" for="register-username">Desired Username</label>
+                        <input class="form-input" type="text" id="register-username" required placeholder="e.g. bob">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="register-password">Password (min 6 chars)</label>
+                        <div class="password-input-wrapper">
+                            <input class="form-input" type="password" id="register-password" required placeholder="••••••••">
+                            <button type="button" class="password-toggle-btn" id="register-password-toggle" title="Show / Hide Password" aria-label="Toggle password visibility">
+                                <svg class="eye-icon eye-open" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                <svg class="eye-icon eye-closed" style="display:none;" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <p class="crypto-note">Upon registration, a full identity suite will be generated: RSA-2048, ML-DSA-65, SLH-DSA, and X25519.</p>
+                    <button class="auth-btn" type="submit">Generate Cryptographic Identity</button>
+                </form>
+                <div class="auth-toggle">
+                    Already registered? <span id="toggle-to-login">Log in here</span>
+                </div>
+            </div>
+            
+            <div id="auth-error" class="auth-error-msg"></div>
+        </div>
+    </div>
+
+    <!-- MAIN APP LAYOUT -->
+    <div id="app-layout" class="app-container" style="display: none;">
+
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+        <!-- Mobile Topbar -->
+        <div class="mobile-topbar">
+            <button class="hamburger-btn" id="hamburger-btn" aria-label="Toggle Navigation Menu" title="Menu">
+                <span class="hamburger-lines">
+                    <span class="line line-1"></span>
+                    <span class="line line-2"></span>
+                    <span class="line line-3"></span>
+                </span>
+            </button>
+            <span class="mobile-topbar-logo">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;vertical-align:text-bottom;display:inline-block;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>PQC PLATFORM
+            </span>
+            <div class="cyber-theme-switch-wrap mobile-theme-wrap" id="mobile-theme-toggle" title="Toggle Light / Dark Mode">
+                <div class="cyber-theme-pill">
+                    <span class="theme-icon-slot day-slot"><i data-lucide="sun"></i></span>
+                    <span class="theme-slider-thumb"></span>
+                    <span class="theme-icon-slot night-slot"><i data-lucide="moon"></i></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-brand-wrapper">
+                    <div class="pqc-live-icon-container" id="pqc-live-icon-trigger" title="Post-Quantum Secure Shield (Hover for details)">
+                        <!-- Live Quantum Holographic Icon -->
+                        <div class="pqc-live-quantum-icon">
+                            <span class="pqc-orbit-halo"></span>
+                            <span class="pqc-orbit-ellipse ellipse-1"></span>
+                            <span class="pqc-orbit-ellipse ellipse-2"></span>
+                            <div class="pqc-lock-core-wrap">
+                                <svg class="pqc-live-lock-svg" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path class="pqc-live-shackle" d="M8 12V8C8 4.68629 10.6863 2 14 2C17.3137 2 20 4.68629 20 8V12" stroke="url(#pqc-svg-grad-1)" stroke-width="2.6" stroke-linecap="round"/>
+                                    <rect class="pqc-live-body" x="4.5" y="11" width="19" height="14.5" rx="3.5" fill="url(#pqc-svg-grad-body)" stroke="url(#pqc-svg-grad-border)" stroke-width="1.8"/>
+                                    <path d="M7.5 15H10.5M17.5 15H20.5" stroke="#00F0FF" stroke-width="1" stroke-linecap="round" opacity="0.85"/>
+                                    <path d="M8.5 20.5H11M17 20.5H19.5" stroke="#00E676" stroke-width="1" stroke-linecap="round" opacity="0.85"/>
+                                    <circle cx="14" cy="17" r="2" fill="#00E676" class="pqc-key-glow-core"/>
+                                    <path d="M13.1 17.8L12.5 21.8H15.5L14.9 17.8Z" fill="#00E676"/>
+                                    <defs>
+                                        <linearGradient id="pqc-svg-grad-1" x1="8" y1="2" x2="20" y2="12" gradientUnits="userSpaceOnUse">
+                                            <stop offset="0%" stop-color="#00F0FF"/>
+                                            <stop offset="100%" stop-color="#00E676"/>
+                                        </linearGradient>
+                                        <linearGradient id="pqc-svg-grad-border" x1="4.5" y1="11" x2="23.5" y2="25.5" gradientUnits="userSpaceOnUse">
+                                            <stop offset="0%" stop-color="#00F0FF"/>
+                                            <stop offset="100%" stop-color="#00E676"/>
+                                        </linearGradient>
+                                        <linearGradient id="pqc-svg-grad-body" x1="4.5" y1="11" x2="23.5" y2="25.5" gradientUnits="userSpaceOnUse">
+                                            <stop offset="0%" stop-color="#0B1726"/>
+                                            <stop offset="100%" stop-color="#040C15"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                <span class="pqc-quantum-sparkle s1"></span>
+                                <span class="pqc-quantum-sparkle s2"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="sidebar-logo">PQC SECURE</h2>
+                </div>
+                <button class="sidebar-close-btn" id="sidebar-close-btn" title="Close Menu" aria-label="Close menu">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                <span class="sidebar-version">v2.5 PQC STACK</span>
+            </div>
+            
+            <nav class="nav-menu">
+                <li class="nav-item active" data-target="dashboard-section"><i data-lucide="layout-dashboard"></i> Dashboard</li>
+                <li class="nav-item" data-target="chat-section"><i data-lucide="message-square-lock"></i> Secure Chat</li>
+                <li class="nav-item" data-target="mail-section"><i data-lucide="mail"></i> Secure Mail</li>
+                <li class="nav-item" data-target="files-section"><i data-lucide="folder-lock"></i> Encrypted Files</li>
+                
+                <!-- Collapsible Security & Diagnostics Group -->
+                <div class="nav-group" id="nav-group-security">
+                    <li class="nav-item nav-group-header" id="nav-header-security" role="button" tabindex="0" title="Security & Diagnostics">
+                        <div class="nav-header-left">
+                            <i data-lucide="shield-alert"></i>
+                            <span class="nav-label">Security & Diagnostics</span>
+                        </div>
+                        <i data-lucide="chevron-down" class="submenu-chevron"></i>
+                    </li>
+                    <div class="nav-submenu" id="nav-submenu-security">
+                        <li class="nav-item nav-subitem" data-target="crypto-lab-section">
+                            <i data-lucide="flask-conical"></i>
+                            <span>Crypto Lab</span>
+                        </li>
+                        <li class="nav-item nav-subitem" data-target="benchmark-section">
+                            <i data-lucide="bar-chart-3"></i>
+                            <span>Benchmarks</span>
+                        </li>
+                        <li class="nav-item nav-subitem" data-target="audit-section">
+                            <i data-lucide="scroll-text"></i>
+                            <span>Audit Logs</span>
+                        </li>
+                    </div>
+                </div>
+
+                <li class="nav-item" data-target="reports-section"><i data-lucide="flag"></i> My Reports</li>
+            </nav>
+        </aside>
+
+        <!-- Main Content View -->
+        <main class="main-content">
+            <!-- Global Top Navigation Bar (Right-Aligned Controls) -->
+            <header class="app-global-header">
+                <div class="header-left-status">
+                    <span class="system-status-indicator">
+                        <span class="status-pulse-ring"></span>
+                        <i data-lucide="shield-check" style="width:14px;height:14px;margin-right:4px;"></i>
+                        <span>PQC QUANTUM-SAFE ACTIVE</span>
+                    </span>
+                    <span class="crypto-chip">NIST FIPS 203 • ML-KEM-768</span>
+                </div>
+                
+                <div class="header-right-actions">
+                    <!-- Advanced Cyber Day/Night Pill Switch -->
+                    <div class="cyber-theme-switch-wrap" id="theme-toggle-btn" title="Toggle Light / Dark Mode">
+                        <div class="cyber-theme-pill">
+                            <span class="theme-icon-slot day-slot">
+                                <i data-lucide="sun"></i>
+                            </span>
+                            <span class="theme-slider-thumb"></span>
+                            <span class="theme-icon-slot night-slot">
+                                <i data-lucide="moon"></i>
+                            </span>
+                        </div>
+                        <span class="theme-mode-label">DARK</span>
+                    </div>
+
+                    <div class="header-user-badge" id="header-user-badge" title="Click to view WhatsApp Profile & Security Details" style="cursor: pointer;">
+                        <div class="header-user-avatar" id="header-user-avatar">U</div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- 1. DASHBOARD -->
+            <div id="dashboard-section" class="content-section active">
+                <div class="section-header">
+                    <h1 class="section-title">Cryptographic Control Dashboard</h1>
+                    <p class="section-desc">Real-time indicators, operational stats, and security event summary</p>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <div class="stat-card safe">
+                        <span class="stat-label">Active Handshakes</span>
+                        <span class="stat-val" id="stat-handshakes">0</span>
+                        <span class="stat-desc">X25519 + ML-KEM-768 sessions</span>
+                    </div>
+                    <div class="stat-card classical">
+                        <span class="stat-label">Encrypted Messages</span>
+                        <span class="stat-val" id="stat-messages">0</span>
+                        <span class="stat-desc">AES-256-GCM chat payloads</span>
+                    </div>
+                    <div class="stat-card safe">
+                        <span class="stat-label">Secure Mail Sent</span>
+                        <span class="stat-val" id="stat-emails">0</span>
+                        <span class="stat-desc">@pqc.local encrypted mail</span>
+                    </div>
+                    <div class="stat-card danger">
+                        <span class="stat-label">Attacks Blocked</span>
+                        <span class="stat-val" id="stat-attacks">0</span>
+                        <span class="stat-desc">Tamper / replay / wrong key</span>
+                    </div>
+                </div>
+
+                <!-- LIVE NETWORK ACCESS BANNER -->
+                <div class="card-panel" style="margin-bottom:20px; border-left: 4px solid var(--accent-cyan);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                        <div>
+                            <h2 style="font-size:1.1rem; margin-bottom:4px; display:flex; align-items:center; gap:8px;">
+                                <i data-lucide="network"></i> Real Device Network Access (LAN / Wi-Fi)
+                            </h2>
+                            <p class="section-desc" id="network-lan-info">
+                                Connect mobile phones, laptops, or tablets on your Wi-Fi network: <strong id="lan-url-display" style="color:var(--accent-cyan);">Loading LAN IP...</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- REAL-TIME SECURITY MONITOR & PACKET INSPECTOR -->
+                <div class="card-panel" style="margin-bottom:20px;">
+                    <div class="card-title" style="display:flex; justify-content:space-between; align-items:center;">
+                        <span><i data-lucide="radio" style="width:16px;height:16px;margin-right:6px;vertical-align:text-bottom;"></i> Live Network Packet Inspector (Captured Application Payload Stream)</span>
+                        <span class="badge safe" id="packet-stream-badge">LIVE MONITORING</span>
+                    </div>
+                    <div class="crypto-table-wrapper" style="max-height:260px; overflow-y:auto;">
+                        <table class="crypto-table">
+                            <thead>
+                                <tr>
+                                    <th># ID</th>
+                                    <th>Timestamp</th>
+                                    <th>Protocol / Transport</th>
+                                    <th>Crypto Mode</th>
+                                    <th>Ciphertext / Payload Preview</th>
+                                    <th>Nonce / Tag</th>
+                                    <th>Security State</th>
+                                    <th>Deep Inspection</th>
+                                </tr>
+                            </thead>
+                            <tbody id="live-packet-table-body">
+                                <tr>
+                                    <td colspan="8" style="text-align:center; color:var(--text-secondary); padding:20px;">
+                                        Waiting for application chat/email traffic... Send a message in Secure Chat to see live packet capture.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="card-panel">
+                    <div class="card-title"><i data-lucide="activity" style="width:16px;height:16px;margin-right:6px;vertical-align:text-bottom;color:var(--color-primary);"></i> Real-Time Cryptographic Pipeline Telemetry Stream</div>
+                    <div id="dashboard-log-console" class="terminal-box">
+                        <div class="log-entry success">> Cryptographic Engine v2.5 initialized.</div>
+                        <div class="log-entry success">> Native liboqs-9 DLL loaded: ML-KEM-512, ML-KEM-768, ML-KEM-1024 & ML-DSA active.</div>
+                        <div class="log-entry success">> Native Python Cryptography: X25519, AES-256-GCM, ChaCha20-Poly1305, HKDF-SHA-384, SHA3-256/384/512.</div>
+                        <div class="log-entry success">> Ascon-128a NIST SP 800-232 Lightweight IoT AEAD: ACTIVE & BENCHMARKED.</div>
+                        <div class="log-entry success">> Grover's Quantum Effort Estimator Engine: READY.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. SECURE CHAT -->
+            <div id="chat-section" class="content-section">
+                <div class="section-header">
+                    <h1 class="section-title">Real-Time Secure Chat</h1>
+                    <p class="section-desc">1-to-1 & Group Encrypted Messaging (Classical, Modern, PQC, and Hybrid Modes)</p>
+                </div>
+                
+                <div class="chat-layout">
+                    <div class="chat-users-panel">
+                        <div class="chat-search-bar-wrap">
+                            <input type="text" id="chat-search-input" class="chat-search-input" placeholder="Search contacts or groups...">
+                        </div>
+                        <div class="chat-folder-tabs">
+                            <button class="chat-folder-tab active" id="tab-chats-active" onclick="switchChatFolder('active')"><i data-lucide="message-square" style="width:14px;height:14px;margin-right:6px;"></i> Chats</button>
+                            <button class="chat-folder-tab" id="tab-chats-archived" onclick="switchChatFolder('archived')"><i data-lucide="archive" style="width:14px;height:14px;margin-right:6px;"></i> Archived <span id="archived-count-badge" class="chat-tab-count">0</span></button>
+                        </div>
+                        
+                        <div class="panel-header" id="peers-header-label">Peer Connections</div>
+                        <ul class="user-list" id="user-list"></ul>
+                        
+                        <div class="panel-header" style="margin-top:16px;">Group Chats</div>
+                        <button class="action-btn sm" id="create-group-btn"><i data-lucide="user-plus" style="width:14px;height:14px;margin-right:4px;"></i> Create Group</button>
+                        <ul class="group-list" id="group-list"></ul>
+                    </div>
+                    
+                    <div class="chat-room">
+                        <div id="chat-room-placeholder" class="placeholder-box">
+                            <i data-lucide="message-square-lock" style="width:48px;height:48px;color:var(--text-muted);opacity:0.6;margin-bottom:12px;"></i>
+                            <p>Select a peer or group to initiate an encrypted session.</p>
+                        </div>
+                        
+                        <div id="chat-room-active" class="chat-room-active" style="display: none;">
+                            <div class="chat-header">
+                                <div class="chat-header-info">
+                                    <button class="mobile-back-btn" id="mobile-back-to-users" title="Back to Contacts">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                                            <polyline points="12 19 5 12 12 5"></polyline>
+                                        </svg>
+                                    </button>
+                                    <div class="chat-peer-avatar-wrap">
+                                        <div class="chat-peer-avatar" id="chat-peer-avatar">?</div>
+                                        <span class="chat-peer-radar-dot" id="chat-peer-radar-dot"></span>
+                                    </div>
+                                    <div class="chat-header-meta">
+                                        <div class="chat-peer-title-row">
+                                            <span class="chat-peer-name" id="chat-peer-name">Contact</span>
+                                            <span class="chat-peer-verified-badge" title="Cryptographically Verified Identity">
+                                                <i data-lucide="shield-check" style="width:14px;height:14px;"></i>
+                                            </span>
+                                            <span id="chat-status-badges" style="display:inline-flex; gap:4px;"></span>
+                                        </div>
+                                        <div class="chat-peer-subtitle-row">
+                                            <span class="session-badge" id="session-security-badge">UNSECURED</span>
+                                            <span class="session-badge disappearing-badge" id="chat-disappearing-badge" title="Click to configure Disappearing Messages" style="cursor:pointer; display:none;"><i data-lucide="clock" style="width:11px;height:11px;margin-right:3px;vertical-align:middle;"></i> <span id="chat-disappearing-label">Off</span></span>
+                                            <span class="chat-peer-sub" id="chat-peer-sub" style="display:none; font-size:0.75rem; color:var(--text-muted);"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chat-header-actions">
+                                    <!-- Handshake Controls in Header with Advanced Cyber Animated Buttons -->
+                                    <div class="handshake-control" id="handshake-control-panel">
+                                        <select class="crypto-select modern-select" id="crypto-mode-select">
+                                            <option value="Hybrid" selected>Hybrid (X25519 + ML-KEM)</option>
+                                            <option value="PQC">Post-Quantum (ML-KEM)</option>
+                                            <option value="Modern Classical">Modern Classical (X25519)</option>
+                                            <option value="Classical">Classical Baseline (RSA-2048)</option>
+                                        </select>
+                                        <select class="crypto-select modern-select" id="nist-level-select" title="NIST FIPS 203 Security Level">
+                                            <option value="3" selected>L3: Balanced (768)</option>
+                                            <option value="1">L1: IoT / Fast (512)</option>
+                                            <option value="5">L5: Military (1024)</option>
+                                        </select>
+                                        <button class="action-btn pqc cyber-animated-btn" id="handshake-btn">
+                                            <i data-lucide="zap" class="btn-icon-animated" style="width:15px;height:15px;margin-right:5px;"></i>
+                                            <span id="handshake-btn-text">Execute Handshake</span>
+                                        </button>
+                                    </div>
+
+                                    <button class="chat-header-icon-btn cyber-icon-btn" id="search-msg-btn" title="Search in conversation">
+                                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="11" cy="11" r="8"></circle>
+                                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                        </svg>
+                                    </button>
+                                    
+                                    <!-- WhatsApp-Style 3-Dots Dropdown Trigger -->
+                                    <div class="chat-menu-dropdown-wrapper">
+                                        <button class="chat-header-icon-btn chat-more-btn cyber-icon-btn" id="chat-more-menu-btn" title="More options">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                                <circle cx="12" cy="12" r="1.5" fill="currentColor"></circle>
+                                                <circle cx="12" cy="5" r="1.5" fill="currentColor"></circle>
+                                                <circle cx="12" cy="19" r="1.5" fill="currentColor"></circle>
+                                            </svg>
+                                        </button>
+                                        <div class="chat-more-dropdown-menu" id="chat-more-dropdown-menu" style="display: none;">
+                                            <button class="chat-dropdown-item" id="menu-item-info">
+                                                <i data-lucide="info"></i> <span>Contact Info</span>
+                                            </button>
+                                            <button class="chat-dropdown-item" id="menu-item-pin">
+                                                <i data-lucide="pin"></i> <span id="menu-pin-label">Pin Chat</span>
+                                            </button>
+                                            <button class="chat-dropdown-item" id="menu-item-archive">
+                                                <i data-lucide="archive"></i> <span id="menu-archive-label">Archive Chat</span>
+                                            </button>
+                                            <button class="chat-dropdown-item" id="menu-item-lock">
+                                                <i data-lucide="lock"></i> <span id="menu-lock-label">Lock Chat (PIN)</span>
+                                            </button>
+                                            <button class="chat-dropdown-item" id="menu-item-disappearing">
+                                                <i data-lucide="clock" class="timer-icon-spin"></i> <span>Disappearing Messages</span>
+                                            </button>
+                                            <button class="chat-dropdown-item" id="menu-item-block" style="display:none;">
+                                                <i data-lucide="ban"></i> <span id="menu-block-label">Block Contact</span>
+                                            </button>
+                                            <button class="chat-dropdown-item report-item" id="menu-item-report">
+                                                <i data-lucide="flag" class="report-icon-pulse"></i> <span>Report User / Misuse</span>
+                                            </button>
+                                            <div class="chat-dropdown-divider"></div>
+                                            <button class="chat-dropdown-item danger" id="menu-item-delete">
+                                                <i data-lucide="trash-2"></i> <span>Delete Chat</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- In-Chat Search Bar -->
+                            <div id="in-chat-search-bar" class="in-chat-search-bar" style="display: none;">
+                                <span style="font-size:0.9rem;"><i data-lucide="search" style="width:14px;height:14px;"></i></span>
+                                <input type="text" id="in-chat-search-input" placeholder="Search keywords in messages...">
+                                <span id="in-chat-search-count" style="font-size:0.75rem; color:var(--text-muted); margin:0 8px;"></span>
+                                <button class="in-chat-search-close" id="close-in-chat-search"><i data-lucide="x" style="width:14px;height:14px;"></i></button>
+                            </div>
+
+                            <!-- Handshake Pending Waiting Banner -->
+                            <div id="handshake-pending-banner" class="handshake-pending-banner" style="display: none;">
+                                <span class="pending-spinner-dot"></span>
+                                <div class="pending-banner-text">
+                                    <strong id="handshake-pending-title">Handshake Requested</strong>
+                                    <span id="handshake-pending-desc">Waiting for peer to accept the secure connection...</span>
+                                </div>
+                            </div>
+                            
+                            <div class="chat-viewport-container" style="position:relative; flex:1; display:flex; flex-direction:column; min-height:0; overflow:hidden; z-index:1;">
+                                <div class="messages-scroller secure-chat-protected" id="chat-messages"></div>
+                                
+                                <!-- Quantum Screenshot Protection Visual Obfuscation Shield -->
+                                <div id="screenshot-shield-overlay" class="screenshot-shield-overlay" style="display:none !important;">
+                                    <div class="shield-warning-box">
+                                        <button type="button" class="shield-close-btn" id="shield-close-btn" title="Dismiss Shield" style="position:absolute; top:12px; right:12px; background:rgba(255,255,255,0.08); border:none; color:#cbd5e1; width:28px; height:28px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; transition: background 0.2s;">
+                                            <i data-lucide="x" style="width:15px;height:15px;"></i>
+                                        </button>
+                                        <div class="shield-warning-icon">
+                                            <i data-lucide="shield-alert" class="shield-radar-pulse"></i>
+                                        </div>
+                                        <h3>QUANTUM PRIVACY SHIELD</h3>
+                                        <p>Screen capture is disabled to prevent post-quantum data exfiltration.</p>
+                                        <span class="shield-badge"><i data-lucide="lock" style="width:12px;height:12px;margin-right:4px;"></i> Confidential Session Protected</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="chat-input-area">
+                                <div class="attack-toggle-bar">
+                                    <label class="attack-checkbox-label tamper-label">
+                                        <input type="checkbox" id="tamper-check"> Simulate Ciphertext Tampering
+                                    </label>
+                                    <label class="attack-checkbox-label replay-label">
+                                        <input type="checkbox" id="replay-check"> Simulate Replay Attack
+                                    </label>
+                                </div>
+                                <div class="input-box-wrapper">
+                                    <input class="message-input" type="text" id="message-input" placeholder="Type plaintext message...">
+                                    <button class="send-btn" id="send-btn"><i data-lucide="send" style="width:14px;height:14px;margin-right:6px;"></i> Encrypt & Send</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. SECURE MAIL -->
+            <div id="mail-section" class="content-section">
+                <div class="mail-client">
+
+                    <!-- LEFT: Folder sidebar -->
+                    <div class="mail-folders">
+                        <button class="mail-compose-fab" id="mail-compose-btn">
+                            <i data-lucide="pen-tool" class="fab-icon" style="width:16px;height:16px;"></i>
+                            <span class="fab-label">Compose</span>
+                        </button>
+
+                        <nav class="mail-folder-nav">
+                            <div class="mail-folder-item active" id="mail-tab-inbox" data-folder="inbox">
+                                <i data-lucide="inbox" style="width:16px;height:16px;margin-right:8px;"></i>
+                                <span class="folder-name">Inbox</span>
+                                <span class="folder-badge" id="inbox-count">0</span>
+                            </div>
+                            <div class="mail-folder-item" id="mail-tab-sent" data-folder="sent">
+                                <i data-lucide="send" style="width:16px;height:16px;margin-right:8px;"></i>
+                                <span class="folder-name">Sent</span>
+                                <span class="folder-badge" id="sent-count">0</span>
+                            </div>
+                        </nav>
+
+                        <div class="mail-security-badge">
+                            <div class="msb-icon"><i data-lucide="shield-check" style="width:20px;height:20px;color:var(--color-primary);"></i></div>
+                            <div class="msb-text">
+                                <div class="msb-title">End-to-End Encrypted</div>
+                                <div class="msb-sub">AES-256-GCM + ML-KEM-768</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CENTER: Mail list -->
+                    <div class="mail-list-panel">
+                        <div class="mail-list-header">
+                            <span class="ml-title" id="mail-folder-label">Inbox</span>
+                            <button class="ml-refresh-btn" id="mail-refresh-btn" title="Refresh"><i data-lucide="rotate-cw" style="width:14px;height:14px;"></i></button>
+                        </div>
+                        <div class="mail-list-body" id="mail-list"></div>
+                    </div>
+
+                    <!-- RIGHT: Reader / Compose -->
+                    <div class="mail-reader-panel">
+                        <!-- Empty state -->
+                        <div id="mail-empty-state" class="mail-empty-state">
+                            <div class="mes-icon"><i data-lucide="shield-check" style="width:48px;height:48px;color:var(--color-primary);margin-bottom:12px;"></i></div>
+                            <div class="mes-title">PQC Secure Mail</div>
+                            <div class="mes-desc">Select a message to read, or compose a new encrypted mail</div>
+                            <div class="mes-specs">
+                                <span>ML-KEM-768</span>
+                                <span>AES-256-GCM</span>
+                                <span>ML-DSA-65</span>
+                            </div>
+                        </div>
+
+                        <!-- Compose view -->
+                        <div id="mail-compose-view" class="mail-compose-view" style="display:none;">
+                            <div class="compose-header">
+                                <h2 class="compose-title"><i data-lucide="mail-plus" style="width:18px;height:18px;margin-right:8px;vertical-align:text-bottom;"></i> New Encrypted Mail</h2>
+                                <button class="compose-close-btn" id="mail-compose-close"><i data-lucide="x" style="width:16px;height:16px;"></i></button>
+                            </div>
+                            <form id="mail-compose-form" class="compose-form">
+                                <div class="compose-field">
+                                    <label class="compose-label">To</label>
+                                    <input class="compose-input" type="text" id="mail-recipient" required placeholder="bob@pqc.local">
+                                </div>
+                                <div class="compose-field">
+                                    <label class="compose-label">Subject</label>
+                                    <input class="compose-input" type="text" id="mail-subject" required placeholder="Enter subject…">
+                                </div>
+                                <div class="compose-field">
+                                    <label class="compose-label">Security Mode</label>
+                                    <select class="compose-input" id="mail-mode">
+                                        <option value="Hybrid">Hybrid (X25519 + ML-KEM)</option>
+                                        <option value="PQC">Post-Quantum (ML-KEM)</option>
+                                        <option value="Modern Classical">Modern Classical (X25519)</option>
+                                        <option value="Classical">Classical Baseline (RSA-2048)</option>
+                                    </select>
+                                </div>
+                                <div class="compose-field" id="mail-nist-level-field">
+                                    <label class="compose-label">NIST Security Level</label>
+                                    <select class="compose-input" id="mail-nist-level">
+                                        <option value="3" selected>Level 3: Balanced Standard (ML-KEM-768)</option>
+                                        <option value="1">Level 1: IoT / High-Speed (ML-KEM-512)</option>
+                                        <option value="5">Level 5: Maximum Military Grade (ML-KEM-1024)</option>
+                                    </select>
+                                </div>
+                                <div class="compose-body-wrap">
+                                    <textarea class="compose-body" id="mail-body" required placeholder="Write your confidential message here…"></textarea>
+                                </div>
+                                <div class="compose-actions">
+                                    <div class="compose-encrypt-note"><i data-lucide="lock" style="width:14px;height:14px;margin-right:6px;vertical-align:text-bottom;"></i> Message will be encrypted before sending</div>
+                                    <button class="compose-send-btn" type="submit">Encrypt &amp; Send <i data-lucide="send" style="width:14px;height:14px;margin-left:6px;"></i></button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Reader view -->
+                        <div id="mail-read-view" class="mail-read-view" style="display:none;">
+                            <div class="reader-toolbar">
+                                <button class="reader-back-btn" id="mail-back-btn"><i data-lucide="arrow-left" style="width:14px;height:14px;margin-right:6px;"></i> Back</button>
+                            </div>
+                            <div id="mail-reader-content" class="mail-reader-card"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 4. ENCRYPTED FILES -->
+            <div id="files-section" class="content-section">
+                <div class="section-header">
+                    <h1 class="section-title">Encrypted File Sharing</h1>
+                    <p class="section-desc">AES-256-GCM per-file key encryption with 512-bit SHA3/SHAKE quantum-proof integrity verification</p>
+                </div>
+                
+                <div class="card-panel">
+                    <h2>Upload File for Encryption</h2>
+                    <p class="section-desc">Universal encrypted vault — supports <strong>all file types</strong>: PDFs, videos, images, audio, documents, archives, code, AI models &amp; more (max 500 MB)</p>
+                    <form id="file-upload-form" class="file-upload-box modern-cyber-upload-box">
+                        <div class="custom-file-picker-group">
+                            <label for="file-input" class="custom-file-btn" id="custom-file-trigger">
+                                <i data-lucide="file-up" class="file-icon-bounce"></i>
+                                <span id="custom-file-label">Browse Any File to Encrypt</span>
+                            </label>
+                            <input type="file" id="file-input" required class="hidden-file-input">
+                            <div id="file-name-preview" class="file-name-preview-badge" style="display:none;">
+                                <i data-lucide="file-check" style="width:14px;height:14px;color:var(--color-primary);"></i>
+                                <span id="file-name-text">filename.ext</span>
+                                <span id="file-size-text" class="file-size-badge"></span>
+                            </div>
+                        </div>
+                        <div class="file-upload-controls-row">
+                            <select id="file-hash-algo" class="crypto-select modern-select" title="Integrity Hash Mode">
+                                <option value="sha3_512" selected>SHA3-512 (512-bit Quantum-Proof)</option>
+                                <option value="shake_256">SHAKE-256 (512-bit XOF)</option>
+                                <option value="sha3_256">SHA3-256 (Standard)</option>
+                            </select>
+                            <button class="action-btn pqc cyber-animated-btn" type="submit" id="file-upload-btn">
+                                <i data-lucide="upload-cloud" class="btn-icon-animated" style="width:16px;height:16px;margin-right:6px;"></i>
+                                <span>Upload &amp; Encrypt File</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="card-panel" style="margin-top:20px;">
+                    <h2>Stored Encrypted Files</h2>
+                    <div class="crypto-table-wrapper">
+                        <table class="crypto-table">
+                            <thead>
+                                <tr>
+                                    <th>Filename</th>
+                                    <th>Size</th>
+                                    <th>Type</th>
+                                    <th>Quantum Integrity Digest</th>
+                                    <th>Timestamp</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="files-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Incoming Handshake Request Modal -->
+            <div id="handshake-request-modal" class="modal-overlay" style="display:none; z-index: 10001;">
+                <div class="modal-card" style="max-width: 440px; text-align: center; border: 1.5px solid var(--color-primary); box-shadow: 0 0 35px rgba(0, 230, 118, 0.3);">
+                    <div class="modal-header" style="justify-content: center; background: rgba(0, 230, 118, 0.08); border-bottom-color: rgba(0, 230, 118, 0.2);">
+                        <h3 id="handshake-request-modal-title" style="color: var(--color-primary); display: flex; align-items: center; gap: 8px; font-size: 1.05rem;">
+                            <i data-lucide="shield-check" style="width:20px;height:20px;"></i> Secure Chat Handshake Request
+                        </h3>
+                    </div>
+                    <div class="modal-body" style="padding: 24px 20px; display: flex; flex-direction: column; align-items: center; gap: 14px;">
+                        <div class="handshake-req-avatar-wrap">
+                            <div class="handshake-req-avatar" id="handshake-req-avatar">?</div>
+                            <span class="handshake-req-radar"></span>
+                        </div>
+                        <div style="font-size: 1.15rem; font-weight: 700; color: var(--text-main);" id="handshake-req-peer-name">Contact</div>
+                        <p style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin: 0; max-width: 340px;">
+                            This user wants to establish a quantum-safe encrypted end-to-end communication channel with you:
+                        </p>
+                        <div class="handshake-req-mode-badge" id="handshake-req-mode-badge">
+                            <i data-lucide="key-round" style="width:14px;height:14px;"></i>
+                            <span id="handshake-req-mode-text">Hybrid (X25519 + ML-KEM-768)</span>
+                        </div>
+                        <div style="display: flex; gap: 12px; width: 100%; margin-top: 8px;">
+                            <button type="button" class="action-btn danger" id="decline-handshake-btn" style="flex: 1; justify-content: center; padding: 10px; font-weight: 600;">
+                                <i data-lucide="x" style="width:15px;height:15px;margin-right:4px;"></i> Decline
+                            </button>
+                            <button type="button" class="action-btn pqc" id="accept-handshake-btn" style="flex: 1.4; justify-content: center; padding: 10px; font-weight: 700;">
+                                <i data-lucide="shield-check" style="width:15px;height:15px;margin-right:6px;"></i> Accept & Connect
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Create Group Chat Modal -->
+            <div id="create-group-modal" class="modal-overlay" style="display:none;">
+                <div class="modal-card" style="max-width: 480px;">
+                    <div class="modal-header">
+                        <h3 id="group-modal-title"><i data-lucide="users" style="width:18px;height:18px;margin-right:6px;vertical-align:text-bottom;"></i> Create Secure Group Chat</h3>
+                        <button class="modal-close-btn" id="close-group-modal-btn"><i data-lucide="x" style="width:16px;height:16px;"></i></button>
+                    </div>
+                    <div class="modal-body" style="padding: 20px;">
+                        <form id="create-group-form">
+                            <div class="form-group" style="margin-bottom: 16px;">
+                                <label class="form-label" for="group-name-input">Group Name</label>
+                                <input class="form-input" type="text" id="group-name-input" required placeholder="e.g. Quantum Research Team">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 16px;">
+                                <label class="form-label">Select Group Members</label>
+                                <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:8px;">Choose registered users to include in this group:</p>
+                                <div id="group-members-list" class="user-select-list">
+                                    <!-- User checkboxes populated dynamically -->
+                                </div>
+                            </div>
+                            <div id="create-group-error" style="color:var(--color-danger); font-size:0.85rem; margin-bottom:12px; min-height:18px;"></div>
+                            <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+                                <button type="button" class="action-btn sm" id="cancel-group-modal-btn">Cancel</button>
+                                <button type="submit" class="action-btn pqc" id="submit-create-group-btn"><i data-lucide="lock" style="width:14px;height:14px;margin-right:4px;"></i> Create Group</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Info & Cryptographic Profile Modal -->
+            <div id="chat-info-modal" class="modal-overlay" style="display:none;">
+                <div class="modal-card" style="max-width: 540px;">
+                    <div class="modal-header">
+                        <h3 id="chat-info-title"><i data-lucide="info" style="width:18px;height:18px;margin-right:6px;vertical-align:text-bottom;"></i> Contact Profile & Security Keys</h3>
+                        <button class="modal-close-btn" id="close-chat-info-btn"><i data-lucide="x" style="width:16px;height:16px;"></i></button>
+                    </div>
+                    <div class="modal-body" id="chat-info-body" style="padding: 20px;">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Lock / Passcode Master Modal -->
+            <div id="chat-lock-modal" class="modal-overlay" style="display:none; z-index: 10005;">
+                <div class="modal-card chat-lock-card" style="max-width: 440px;">
+                    <div class="modal-header">
+                        <h3 id="chat-lock-title" style="display:flex; align-items:center; gap:8px;">
+                            <i data-lucide="shield-lock" class="quantum-shield-icon" style="width:20px;height:20px;color:var(--color-primary);"></i>
+                            Quantum Passcode Lock
+                        </h3>
+                        <button class="modal-close-btn" id="close-chat-lock-btn"><i data-lucide="x" style="width:16px;height:16px;"></i></button>
+                    </div>
+                    <div class="modal-body" style="padding: 24px;">
+                        
+                        <!-- Lock Icon Shackle Visual -->
+                        <div class="lock-visual-container">
+                            <div class="quantum-lock-ring" id="lock-ring-glow">
+                                <div class="lock-shackle-icon" id="lock-shackle-icon">
+                                    <i data-lucide="lock" style="width:36px;height:36px;"></i>
+                                </div>
+                            </div>
+                            <h4 id="chat-lock-target-name" style="margin-top:12px; font-size: 1.1rem; color: var(--color-primary); font-weight:700;">Protected Chat</h4>
+                            <p id="chat-lock-desc" style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px; margin-bottom: 16px;">
+                                Enter your secret passcode (PIN or Alphanumeric) to proceed.
+                            </p>
+                        </div>
+
+                        <!-- Mode Switcher Tabs (Only visible when chat is already locked and managing) -->
+                        <div id="lock-manage-tabs" class="lock-tabs-wrap" style="display:none; margin-bottom: 18px;">
+                            <button type="button" class="lock-tab-btn active" id="tab-btn-change-pass">
+                                <i data-lucide="key-round" style="width:14px;height:14px;margin-right:4px;"></i> Change Passcode
+                            </button>
+                            <button type="button" class="lock-tab-btn danger" id="tab-btn-remove-lock">
+                                <i data-lucide="unlock" style="width:14px;height:14px;margin-right:4px;"></i> Remove Lock
+                            </button>
+                        </div>
+
+                        <form id="chat-lock-form">
+                            <!-- Current Passcode field (for unlock, change, or remove) -->
+                            <div class="form-group" id="group-current-passcode" style="margin-bottom: 14px; position:relative;">
+                                <label class="modal-field-label" id="lbl-current-passcode" style="display:block; text-align:left; font-size:0.8rem; font-weight:600; margin-bottom:4px; color:var(--text-muted);">
+                                    Enter Passcode
+                                </label>
+                                <div style="position:relative; display:flex; align-items:center;">
+                                    <input class="form-input" type="password" id="chat-lock-pin-input" autocomplete="off" placeholder="Enter PIN or Passcode" style="width:100%; padding-right:40px;">
+                                    <button type="button" class="pass-toggle-btn" id="toggle-lock-pass-btn" title="Show/Hide Passcode">
+                                        <i data-lucide="eye" style="width:16px;height:16px;"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- New Passcode fields (Only for setting or changing passcode) -->
+                            <div id="group-new-passcode-wrap" style="display:none;">
+                                <div class="form-group" style="margin-bottom: 14px;">
+                                    <label class="modal-field-label" style="display:block; text-align:left; font-size:0.8rem; font-weight:600; margin-bottom:4px; color:var(--text-muted);">
+                                        New Passcode (Min 4 chars)
+                                    </label>
+                                    <input class="form-input" type="password" id="chat-lock-new-pin-input" autocomplete="off" placeholder="New Passcode">
+                                </div>
+                                <div class="form-group" style="margin-bottom: 14px;">
+                                    <label class="modal-field-label" style="display:block; text-align:left; font-size:0.8rem; font-weight:600; margin-bottom:4px; color:var(--text-muted);">
+                                        Confirm New Passcode
+                                    </label>
+                                    <input class="form-input" type="password" id="chat-lock-confirm-pin-input" autocomplete="off" placeholder="Confirm Passcode">
+                                </div>
+                            </div>
+
+                            <div id="chat-lock-error" style="color: var(--color-danger); font-size: 0.82rem; margin-bottom: 14px; min-height: 18px; text-align:center; font-weight:600;"></div>
+
+                            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top:10px;">
+                                <button type="button" class="action-btn sm" id="cancel-chat-lock-btn">Cancel</button>
+                                <button type="submit" class="action-btn pqc cyber-animated-btn" id="submit-chat-lock-btn">
+                                    <i data-lucide="unlock" style="width:14px;height:14px;margin-right:4px;"></i> 
+                                    <span id="submit-chat-lock-text">Unlock Chat</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Disappearing Messages Configuration Master Modal -->
+            <div id="disappearing-messages-modal" class="modal-overlay" style="display:none; z-index: 10002;">
+                <div class="modal-card disappearing-modal-card" style="max-width: 480px;">
+                    <div class="modal-header">
+                        <h3 style="display:flex; align-items:center; gap:8px;">
+                            <i data-lucide="timer" class="timer-icon-spin" style="width:20px;height:20px;color:var(--accent-cyan);"></i>
+                            Disappearing Messages
+                        </h3>
+                        <button class="modal-close-btn" id="close-disappearing-modal-btn"><i data-lucide="x"></i></button>
+                    </div>
+                    <div class="modal-body" style="padding: 22px;">
+                        <div class="disappearing-banner-card">
+                            <div class="disappearing-banner-icon"><i data-lucide="hourglass" style="width:26px;height:26px;"></i></div>
+                            <div class="disappearing-banner-text">
+                                <strong>Ephemeral Quantum Storage</strong>
+                                <span>New messages in this chat will self-destruct for both participants after the selected timeframe.</span>
+                            </div>
+                        </div>
+                        
+                        <label class="modal-field-label" style="margin-top:16px; margin-bottom:10px; display:block; font-weight:600; font-size:0.85rem; color:var(--text-muted);">
+                            Select Expiration Period:
+                        </label>
+
+                        <div class="disappearing-options-grid">
+                            <label class="disappearing-opt-card">
+                                <input type="radio" name="disappearing-days-choice" value="0" checked>
+                                <span class="opt-indicator"></span>
+                                <div class="opt-info">
+                                    <strong>Off</strong>
+                                    <span>Permanent messages</span>
+                                </div>
+                            </label>
+                            <label class="disappearing-opt-card">
+                                <input type="radio" name="disappearing-days-choice" value="1">
+                                <span class="opt-indicator"></span>
+                                <div class="opt-info">
+                                    <strong>24 Hours</strong>
+                                    <span>1 Day expiration</span>
+                                </div>
+                            </label>
+                            <label class="disappearing-opt-card">
+                                <input type="radio" name="disappearing-days-choice" value="7">
+                                <span class="opt-indicator"></span>
+                                <div class="opt-info">
+                                    <strong>7 Days</strong>
+                                    <span>1 Week expiration</span>
+                                </div>
+                            </label>
+                            <label class="disappearing-opt-card">
+                                <input type="radio" name="disappearing-days-choice" value="30">
+                                <span class="opt-indicator"></span>
+                                <div class="opt-info">
+                                    <strong>30 Days</strong>
+                                    <span>1 Month expiration</span>
+                                </div>
+                            </label>
+                            <label class="disappearing-opt-card">
+                                <input type="radio" name="disappearing-days-choice" value="90">
+                                <span class="opt-indicator"></span>
+                                <div class="opt-info">
+                                    <strong>90 Days</strong>
+                                    <span>3 Months expiration</span>
+                                </div>
+                            </label>
+                            <label class="disappearing-opt-card">
+                                <input type="radio" name="disappearing-days-choice" value="custom">
+                                <span class="opt-indicator"></span>
+                                <div class="opt-info">
+                                    <strong>Custom Duration</strong>
+                                    <span>Specify minutes, hours or days</span>
+                                </div>
+                            </label>
+                        </div>
+                        
+                        <!-- Custom Duration Controls -->
+                        <div id="custom-days-input-wrap" style="display:none; margin-top:14px; background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:14px;">
+                            <div style="display:flex; align-items:center; gap:10px;">
+                                <input type="number" id="custom-disappearing-val" min="1" max="10000" placeholder="e.g. 12" class="form-input" style="flex:1;">
+                                <select id="custom-disappearing-unit" class="form-input" style="width:120px; font-weight:600;">
+                                    <option value="minutes">Minutes</option>
+                                    <option value="hours" selected>Hours</option>
+                                    <option value="days">Days</option>
+                                </select>
+                            </div>
+                            <div id="disappearing-live-preview" style="font-size:0.8rem; color:var(--accent-cyan); margin-top:8px; font-weight:600; display:flex; align-items:center; gap:4px;">
+                                <i data-lucide="info" style="width:13px;height:13px;"></i> Messages will vanish 12 hours after being sent.
+                            </div>
+                        </div>
+
+                        <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:22px;">
+                            <button type="button" class="action-btn sm" id="cancel-disappearing-btn">Cancel</button>
+                            <button type="button" class="action-btn pqc cyber-animated-btn" id="save-disappearing-btn">
+                                <i data-lucide="check-circle" class="btn-icon-animated" style="width:15px;height:15px;margin-right:5px;"></i>
+                                <span>Save Expiration</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Misuse Reporting Modal -->
+            <div id="report-user-modal" class="modal-overlay" style="display:none; z-index: 10003;">
+                <div class="modal-card report-modal-card">
+
+                    <!-- STEP 1: Form -->
+                    <div id="report-form-view">
+                        <div class="modal-header report-modal-header">
+                            <h3 style="display:flex;align-items:center;gap:8px;color:#ef4444;">
+                                <i data-lucide="shield-alert" class="report-shield-bounce" style="width:20px;height:20px;"></i>
+                                Report Misuse / Abuse
+                            </h3>
+                            <button class="modal-close-btn" id="close-report-modal-btn"><i data-lucide="x"></i></button>
+                        </div>
+                        <div class="modal-body report-modal-body">
+
+                            <!-- Target user card -->
+                            <div class="report-user-target-card">
+                                <div class="report-user-avatar" id="report-target-avatar">?</div>
+                                <div class="report-user-meta">
+                                    <span class="report-user-label">Reporting against</span>
+                                    <strong id="report-target-username">Username</strong>
+                                </div>
+                                <span class="report-severity-badge" id="report-severity-badge">HIGH</span>
+                            </div>
+
+                            <!-- Category label -->
+                            <p class="report-section-label">Select incident category:</p>
+
+                            <!-- Reason grid -->
+                            <div class="report-reason-grid">
+                                <label class="report-reason-card" data-severity="HIGH">
+                                    <input type="radio" name="report-reason-choice" value="Harassment / Abusive Behavior" checked>
+                                    <span class="reason-indicator"></span>
+                                    <span class="reason-icon-wrap">
+                                        <i data-lucide="message-circle-x" style="width:15px;height:15px;"></i>
+                                    </span>
+                                    <div class="reason-text">
+                                        <strong>Harassment / Abusive Behavior</strong>
+                                        <span>Threatening, offensive or abusive messages</span>
+                                    </div>
+                                    <span class="reason-sev-tag sev-high">HIGH</span>
+                                </label>
+                                <label class="report-reason-card" data-severity="MEDIUM">
+                                    <input type="radio" name="report-reason-choice" value="Spam / Scams / Unsolicited Messages">
+                                    <span class="reason-indicator"></span>
+                                    <span class="reason-icon-wrap">
+                                        <i data-lucide="mail-warning" style="width:15px;height:15px;"></i>
+                                    </span>
+                                    <div class="reason-text">
+                                        <strong>Spam &amp; Phishing</strong>
+                                        <span>Suspicious links, fraudulent solicitations</span>
+                                    </div>
+                                    <span class="reason-sev-tag sev-medium">MEDIUM</span>
+                                </label>
+                                <label class="report-reason-card" data-severity="CRITICAL">
+                                    <input type="radio" name="report-reason-choice" value="Unauthorized Screenshot / Exfiltration Attempt">
+                                    <span class="reason-indicator"></span>
+                                    <span class="reason-icon-wrap">
+                                        <i data-lucide="camera-off" style="width:15px;height:15px;"></i>
+                                    </span>
+                                    <div class="reason-text">
+                                        <strong>Screenshot &amp; Data Exfiltration</strong>
+                                        <span>Attempting to steal or copy private messages</span>
+                                    </div>
+                                    <span class="reason-sev-tag sev-critical">CRITICAL</span>
+                                </label>
+                                <label class="report-reason-card" data-severity="CRITICAL">
+                                    <input type="radio" name="report-reason-choice" value="Malicious Tamper / Cryptanalytic Exploit">
+                                    <span class="reason-indicator"></span>
+                                    <span class="reason-icon-wrap">
+                                        <i data-lucide="skull" style="width:15px;height:15px;"></i>
+                                    </span>
+                                    <div class="reason-text">
+                                        <strong>Cipher Tampering / Exploit</strong>
+                                        <span>Ciphertext manipulation or replay attacks</span>
+                                    </div>
+                                    <span class="reason-sev-tag sev-critical">CRITICAL</span>
+                                </label>
+                                <label class="report-reason-card" data-severity="MEDIUM">
+                                    <input type="radio" name="report-reason-choice" value="Inappropriate / Harmful Content">
+                                    <span class="reason-indicator"></span>
+                                    <span class="reason-icon-wrap">
+                                        <i data-lucide="triangle-alert" style="width:15px;height:15px;"></i>
+                                    </span>
+                                    <div class="reason-text">
+                                        <strong>Inappropriate Content</strong>
+                                        <span>Violations of communication standards</span>
+                                    </div>
+                                    <span class="reason-sev-tag sev-medium">MEDIUM</span>
+                                </label>
+                                <label class="report-reason-card" data-severity="LOW">
+                                    <input type="radio" name="report-reason-choice" value="Other Misuse">
+                                    <span class="reason-indicator"></span>
+                                    <span class="reason-icon-wrap">
+                                        <i data-lucide="circle-ellipsis" style="width:15px;height:15px;"></i>
+                                    </span>
+                                    <div class="reason-text">
+                                        <strong>Other Misuse</strong>
+                                        <span>Any other security or policy violations</span>
+                                    </div>
+                                    <span class="reason-sev-tag sev-low">LOW</span>
+                                </label>
+                            </div>
+
+                            <!-- Details textarea -->
+                            <div class="report-details-wrap">
+                                <label class="report-section-label" for="report-details-input">
+                                    Additional Details
+                                    <span style="color:var(--text-muted);font-weight:400;">(optional)</span>
+                                </label>
+                                <textarea id="report-details-input" class="form-input report-textarea"
+                                    rows="3" maxlength="500"
+                                    placeholder="Briefly describe what happened so administrators can investigate..."></textarea>
+                                <div class="report-char-counter">
+                                    <span id="report-char-count">0</span> / 500
+                                </div>
+                            </div>
+
+                            <!-- Block toggle -->
+                            <div class="report-block-toggle-wrap">
+                                <div class="report-block-left">
+                                    <i data-lucide="ban" style="width:16px;height:16px;color:#ef4444;flex-shrink:0;"></i>
+                                    <div>
+                                        <strong style="font-size:0.83rem;display:block;">Block this user immediately</strong>
+                                        <span style="font-size:0.74rem;color:var(--text-muted);">Prevents all future contact from this user</span>
+                                    </div>
+                                </div>
+                                <label class="report-toggle-switch">
+                                    <input type="checkbox" id="report-also-block-check" checked>
+                                    <span class="report-toggle-track">
+                                        <span class="report-toggle-thumb"></span>
+                                    </span>
+                                </label>
+                            </div>
+
+                            <!-- Actions -->
+                            <div class="report-actions">
+                                <button type="button" class="action-btn sm" id="cancel-report-btn">Cancel</button>
+                                <button type="button" class="action-btn danger report-submit-btn" id="submit-report-btn">
+                                    <i data-lucide="flag" class="report-flag-anim" style="width:15px;height:15px;margin-right:5px;"></i>
+                                    <span id="report-submit-label">Submit Report</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: Success screen -->
+                    <div id="report-success-view" style="display:none;">
+                        <div class="report-success-screen">
+                            <div class="report-success-icon-wrap">
+                                <i data-lucide="shield-check" style="width:40px;height:40px;color:#22c55e;"></i>
+                            </div>
+                            <h3 style="margin:14px 0 6px;font-size:1.1rem;">Report Submitted</h3>
+                            <p style="color:var(--text-muted);font-size:0.84rem;margin:0 0 12px;">
+                                Your report has been securely logged and flagged for administrator review.
+                            </p>
+                            <div class="report-success-meta" id="report-success-meta"></div>
+                            <div class="report-success-note">
+                                <i data-lucide="info" style="width:13px;height:13px;vertical-align:middle;margin-right:5px;color:#22c55e;"></i>
+                                This report is confidential. The reported user will not be notified.
+                            </div>
+                            <button class="action-btn" id="report-done-btn" style="margin-top:20px;width:100%;justify-content:center;">
+                                <i data-lucide="check" style="width:14px;height:14px;margin-right:6px;"></i>Done
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Deep Packet Cryptographic Inspection Modal -->
+            <div id="packet-detail-modal" class="modal-overlay" style="display:none;">
+                <div class="modal-card" style="max-width: 720px; max-height: 88vh; display: flex; flex-direction: column;">
+                    <div class="modal-header">
+                        <h3 id="packet-detail-title" style="display:flex; align-items:center; gap:8px;">
+                            <i data-lucide="binary" style="width:18px;height:18px;color:var(--accent-cyan);"></i>
+                            Cryptographic Packet Telemetry & Algorithm Inspector
+                        </h3>
+                        <button class="modal-close-btn" id="close-packet-modal-btn"><i data-lucide="x" style="width:16px;height:16px;"></i></button>
+                    </div>
+                    <div class="modal-body" id="packet-detail-body" style="padding: 20px; overflow-y: auto; flex: 1;">
+                        <!-- Content dynamically inserted -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- WhatsApp Style Profile Modal / Drawer -->
+            <div id="profile-drawer-modal" class="modal-overlay whatsapp-profile-overlay" style="display:none;">
+                <div class="whatsapp-profile-card">
+                    <!-- WhatsApp-style Header with Back arrow -->
+                    <div class="whatsapp-profile-header">
+                        <button class="whatsapp-back-btn" id="close-profile-drawer-btn" title="Back">
+                            <i data-lucide="arrow-left"></i>
+                        </button>
+                        <h2>Profile</h2>
+                    </div>
+
+                    <div class="whatsapp-profile-scroll-body">
+                        <!-- 1. WhatsApp Avatar Section with Camera Icon -->
+                        <div class="whatsapp-avatar-wrap">
+                            <div class="whatsapp-avatar-large" id="profile-avatar-large" title="Change Profile Theme">
+                                <span id="profile-avatar-letter">N</span>
+                                <div class="whatsapp-avatar-hover-overlay" id="change-avatar-btn">
+                                    <i data-lucide="camera" style="width:28px;height:28px;"></i>
+                                    <span>CHANGE<br>THEME</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Avatar Color Theme Picker -->
+                            <div class="avatar-theme-picker" id="avatar-theme-picker" style="display:none;">
+                                <div class="picker-title">Select Avatar Gradient Theme:</div>
+                                <div class="color-palette">
+                                    <span class="color-dot active" data-gradient="emerald" style="background: linear-gradient(135deg, #00e676, #00b0ff);" title="Quantum Emerald"></span>
+                                    <span class="color-dot" data-gradient="cyan" style="background: linear-gradient(135deg, #00f0ff, #7000ff);" title="Cyber Cyan"></span>
+                                    <span class="color-dot" data-gradient="violet" style="background: linear-gradient(135deg, #a855f7, #ec4899);" title="Neon Violet"></span>
+                                    <span class="color-dot" data-gradient="amber" style="background: linear-gradient(135deg, #f59e0b, #ef4444);" title="Solar Amber"></span>
+                                    <span class="color-dot" data-gradient="matrix" style="background: linear-gradient(135deg, #10b981, #064e3b);" title="Matrix Green"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2. Your Name Section (WhatsApp style with inline pen edit) -->
+                        <div class="whatsapp-profile-section">
+                            <div class="whatsapp-section-label">Your name</div>
+                            <div class="whatsapp-row-display" id="profile-name-display-row">
+                                <span class="whatsapp-display-value" id="profile-display-name-val">User</span>
+                                <button class="whatsapp-edit-pen-btn" id="edit-name-pen-btn" title="Edit name">
+                                    <i data-lucide="pencil"></i>
+                                </button>
+                            </div>
+                            <div class="whatsapp-row-edit" id="profile-name-edit-row" style="display:none;">
+                                <input type="text" class="whatsapp-inline-input" id="profile-name-input" maxlength="25" placeholder="Enter your name">
+                                <span class="whatsapp-char-counter" id="name-char-count">25</span>
+                                <button class="whatsapp-save-btn" id="save-name-btn" title="Save"><i data-lucide="check"></i></button>
+                                <button class="whatsapp-cancel-btn" id="cancel-name-btn" title="Cancel"><i data-lucide="x"></i></button>
+                            </div>
+                            <p class="whatsapp-section-helper">
+                                This is not your username or pin. This name will be visible to your PQC contacts and group chats.
+                            </p>
+                        </div>
+
+                        <!-- 3. About / Status Section (WhatsApp style with quick status pills) -->
+                        <div class="whatsapp-profile-section">
+                            <div class="whatsapp-section-label">About</div>
+                            <div class="whatsapp-row-display" id="profile-about-display-row">
+                                <span class="whatsapp-display-value" id="profile-display-about-val">🔐 Quantum Secured | ML-KEM-768 Active</span>
+                                <button class="whatsapp-edit-pen-btn" id="edit-about-pen-btn" title="Edit About">
+                                    <i data-lucide="pencil"></i>
+                                </button>
+                            </div>
+                            <div class="whatsapp-row-edit" id="profile-about-edit-row" style="display:none;">
+                                <input type="text" class="whatsapp-inline-input" id="profile-about-input" maxlength="80" placeholder="Set your status">
+                                <button class="whatsapp-save-btn" id="save-about-btn" title="Save"><i data-lucide="check"></i></button>
+                                <button class="whatsapp-cancel-btn" id="cancel-about-btn" title="Cancel"><i data-lucide="x"></i></button>
+                            </div>
+                            
+                            <!-- WhatsApp Quick Status Presets -->
+                            <div class="whatsapp-status-presets">
+                                <div class="preset-label">Quick Presets:</div>
+                                <div class="preset-chips">
+                                    <button type="button" class="status-chip" data-status="🟢 Available">🟢 Available</button>
+                                    <button type="button" class="status-chip" data-status="🛡️ Quantum Secured">🛡️ Quantum Secured</button>
+                                    <button type="button" class="status-chip" data-status="⚡ Encrypting Traffic">⚡ Encrypting Traffic</button>
+                                    <button type="button" class="status-chip" data-status="💻 In the Attack Lab">💻 In the Attack Lab</button>
+                                    <button type="button" class="status-chip" data-status="🔕 Do Not Disturb">🔕 Do Not Disturb</button>
+                                    <button type="button" class="status-chip" data-status="🚀 PQC Stack v2.5">🚀 PQC Stack v2.5</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. Contact & Security Node Section -->
+                        <div class="whatsapp-profile-section">
+                            <div class="whatsapp-section-label">Contact & Security Node</div>
+                            <div class="whatsapp-info-item">
+                                <div class="info-icon"><i data-lucide="mail"></i></div>
+                                <div class="info-content">
+                                    <span class="info-title">PQC Secure Email</span>
+                                    <span class="info-value" id="profile-display-email">user@pqc.local</span>
+                                </div>
+                            </div>
+                            <div class="whatsapp-info-item">
+                                <div class="info-icon"><i data-lucide="phone"></i></div>
+                                <div class="info-content" style="flex:1;">
+                                    <span class="info-title">PQC Secure Phone / Node ID</span>
+                                    <div class="whatsapp-row-display" id="profile-phone-display-row">
+                                        <span class="info-value" id="profile-display-phone">+91 98401 • PQC-NODE-781</span>
+                                        <button class="whatsapp-edit-pen-btn sm" id="edit-phone-pen-btn" title="Edit phone"><i data-lucide="pencil" style="width:12px;height:12px;"></i></button>
+                                    </div>
+                                    <div class="whatsapp-row-edit" id="profile-phone-edit-row" style="display:none; margin-top:4px;">
+                                        <input type="text" class="whatsapp-inline-input" id="profile-phone-input" placeholder="+91 98401 23456">
+                                        <button class="whatsapp-save-btn" id="save-phone-btn"><i data-lucide="check"></i></button>
+                                        <button class="whatsapp-cancel-btn" id="cancel-phone-btn"><i data-lucide="x"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 5. Cryptographic Identity Fingerprint -->
+                        <div class="whatsapp-profile-section">
+                            <div class="whatsapp-section-label">
+                                <span>Cryptographic Identity Keys</span>
+                            </div>
+                            <div class="key-fingerprint-box">
+                                <div class="fp-header">
+                                    <span><i data-lucide="fingerprint" style="width:13px;height:13px;margin-right:4px;vertical-align:text-bottom;"></i> ML-DSA-65 Identity Fingerprint</span>
+                                    <button class="action-btn sm" id="copy-fp-btn" title="Copy Fingerprint"><i data-lucide="copy" style="width:12px;height:12px;"></i></button>
+                                </div>
+                                <div class="fp-code" id="profile-key-fingerprint">7F:A3:9B:4C:E1:82:3D:20:91:0F:7C:E6:55:1A:BC:D2</div>
+                            </div>
+                        </div>
+
+                        <!-- 6. Privacy, Security & Sessions (WhatsApp style) -->
+                        <div class="whatsapp-profile-section">
+                            <div class="whatsapp-section-label">Privacy & Session Features</div>
+                            <div class="whatsapp-setting-row">
+                                <div class="setting-desc">
+                                    <strong>End-to-End Quantum Encryption</strong>
+                                    <span>Secured with ML-KEM-768 & AES-256-GCM.</span>
+                                </div>
+                                <span class="badge safe" style="font-size:0.75rem;">ACTIVE</span>
+                            </div>
+
+                            <div class="whatsapp-setting-row">
+                                <div class="setting-desc">
+                                    <strong>Read Receipts</strong>
+                                    <span>Show double check status ticks</span>
+                                </div>
+                                <label class="whatsapp-toggle-switch">
+                                    <input type="checkbox" id="read-receipts-toggle" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="whatsapp-setting-row">
+                                <div class="setting-desc">
+                                    <strong>Active Session Device</strong>
+                                    <span id="session-device-text">Windows 11 • Desktop Browser • Active Now</span>
+                                </div>
+                                <span class="crypto-chip" style="font-size:0.72rem;">ONLINE</span>
+                            </div>
+                        </div>
+
+                        <!-- 7. Logout Action -->
+                        <div class="whatsapp-profile-section" style="border-bottom:none; margin-bottom:20px;">
+                            <button class="whatsapp-logout-action-btn" id="drawer-logout-btn">
+                                <i data-lucide="log-out"></i> Log Out of Account
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Primitive Live Test Result Modal -->
+            <div id="primitive-test-modal" class="modal-overlay" style="display:none;">
+                <div class="modal-card" style="max-width: 580px;">
+                    <div class="modal-header">
+                        <h3 id="primitive-modal-title"><i data-lucide="cpu" style="width:18px;height:18px;margin-right:6px;vertical-align:text-bottom;color:var(--accent-cyan);"></i> Live Primitive Execution Test</h3>
+                        <button class="modal-close-btn" id="close-primitive-modal-btn"><i data-lucide="x" style="width:16px;height:16px;"></i></button>
+                    </div>
+                    <div class="modal-body" id="primitive-modal-body" style="padding: 20px;">
+                        <!-- Content inserted dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. CRYPTO LAB -->
+            <div id="crypto-lab-section" class="content-section">
+                <div class="section-header">
+                    <h1 class="section-title">Cryptographic Laboratory</h1>
+                    <p class="section-desc">Status, real-time specifications, and interactive live execution of all 10 cryptographic primitives</p>
+                </div>
+                
+                <div class="crypto-table-wrapper">
+                    <table class="crypto-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Primitive Name</th>
+                                <th>Role</th>
+                                <th>Category</th>
+                                <th>Runtime Status</th>
+                                <th>Key / Ciphertext Profile</th>
+                                <th style="text-align:center;">Live Test</th>
+                            </tr>
+                        </thead>
+                        <tbody id="primitives-table-body"></tbody>
+                    </table>
+                </div>
+
+                <!-- Interactive Cryptographic Sandbox & Primitive Evaluator -->
+                <div class="card-panel" style="margin-top:24px; border-left: 4px solid var(--color-primary);">
+                    <div class="card-title" style="display:flex; justify-content:space-between; align-items:center;">
+                        <span><i data-lucide="flask-conical" style="width:18px;height:18px;margin-right:6px;vertical-align:text-bottom;color:var(--color-primary);"></i> Interactive Cryptographic Sandbox</span>
+                        <span class="crypto-chip">LIVE HARDWARE EXECUTION</span>
+                    </div>
+                    <p class="section-desc" style="margin-bottom:16px;">
+                        Type custom text below to execute real-time Post-Quantum key encapsulation, digital signing, or AEAD authenticated encryption on the host CPU.
+                    </p>
+
+                    <div style="display:grid; grid-template-columns: 1fr auto; gap:12px; margin-bottom:14px;">
+                        <input type="text" id="crypto-sandbox-input" class="form-input" placeholder="Type test plaintext or secret message to encrypt / sign..." value="Classified Post-Quantum Transmission Payload 2026">
+                        <select id="crypto-sandbox-alg" class="form-input" style="min-width:180px; width:auto;">
+                            <option value="ML-KEM-768" selected>ML-KEM-768 (KEM)</option>
+                            <option value="ML-DSA-65">ML-DSA-65 (Sig)</option>
+                            <option value="SLH-DSA">SLH-DSA (Sig)</option>
+                            <option value="AES-256-GCM">AES-256-GCM (AEAD)</option>
+                            <option value="ChaCha20-Poly1305">ChaCha20-Poly1305 (AEAD)</option>
+                            <option value="Ascon-128a">Ascon-128a (Lightweight)</option>
+                            <option value="X25519">X25519 (ECDH)</option>
+                            <option value="SHA3-512">SHA3-512 (Hash)</option>
+                            <option value="SHAKE-256">SHAKE-256 (XOF)</option>
+                            <option value="RSA-2048">RSA-2048 (Classical)</option>
+                        </select>
+                    </div>
+
+                    <button class="action-btn pqc" id="run-sandbox-btn" style="margin-bottom:16px;">
+                        <i data-lucide="play" style="width:15px;height:15px;margin-right:6px;"></i> Execute Primitive Live
+                    </button>
+
+                    <div id="crypto-sandbox-output" class="terminal-box" style="display:none; height:150px; font-family:var(--font-mono); font-size:0.83rem;">
+                        <!-- Sandbox execution output -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. BENCHMARKS -->
+            <div id="benchmark-section" class="content-section">
+                <div class="section-header">
+                    <h1 class="section-title">Performance Benchmark Laboratory</h1>
+                    <p class="section-desc">Dynamic runtime measurements executed directly on this host machine</p>
+                </div>
+                
+                <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+                    <button class="action-btn pqc" id="run-benchmarks-btn"><i data-lucide="zap" style="width:16px;height:16px;margin-right:6px;"></i> Run Full Benchmark Suite</button>
+                    <span id="benchmark-status-badge" style="font-size:0.82rem; font-family:var(--font-mono); color:var(--text-muted);">Ready to benchmark</span>
+                </div>
+
+                <!-- Benchmark Progress Indicator -->
+                <div id="benchmark-progress-box" class="card-panel" style="display:none; margin-top:16px; border-left:4px solid var(--accent-cyan); padding:14px 18px;">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+                        <span style="font-size:0.9rem; font-weight:600; color:var(--accent-cyan); display:flex; align-items:center; gap:8px;">
+                            <span class="status-pulse-ring" style="width:8px;height:8px;display:inline-block;"></span>
+                            <span id="benchmark-progress-text">Executing host machine benchmarks...</span>
+                        </span>
+                        <span id="benchmark-progress-percent" style="font-family:var(--font-mono); font-size:0.85rem; color:var(--text-muted);">Running...</span>
+                    </div>
+                    <div style="width:100%; height:6px; background:rgba(255,255,255,0.08); border-radius:3px; overflow:hidden;">
+                        <div id="benchmark-progress-bar" style="width:45%; height:100%; background:linear-gradient(90deg, var(--color-primary), var(--accent-cyan)); transition: width 0.3s ease;"></div>
+                    </div>
+                </div>
+                
+                <div class="benchmark-layout" style="margin-top:20px;">
+                    <div class="chart-panel">
+                        <canvas id="benchmarkChart"></canvas>
+                    </div>
+                    <div class="benchmark-data-panel">
+                        <div class="crypto-table-wrapper">
+                            <table class="crypto-table">
+                                <thead>
+                                    <tr>
+                                        <th>Scheme</th>
+                                        <th>Operation</th>
+                                        <th>Avg Time (ms)</th>
+                                        <th>Payload Size</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="benchmark-table-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. AUDIT LOGS -->
+            <div id="audit-section" class="content-section">
+                <div class="section-header">
+                    <h1 class="section-title">Security Audit Log</h1>
+                    <p class="section-desc">Immutable audit record of logins, handshakes, encryptions, and blocked attack attempts</p>
+                </div>
+                
+                <div class="crypto-table-wrapper">
+                    <table class="crypto-table">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>User</th>
+                                <th>Action</th>
+                                <th>Algorithm / Mode</th>
+                                <th>Result</th>
+                                <th>Risk Level</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody id="audit-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 10. MY REPORTS -->
+            <div id="reports-section" class="content-section">
+                <div class="section-header">
+                    <h1 class="section-title">My Reports</h1>
+                    <p class="section-desc">Track security and misuse reports you have submitted. Each report is logged and reviewed by system administrators.</p>
+                </div>
+
+                <!-- Stats Row -->
+                <div class="stats-row" id="reports-stats-row" style="display:flex; gap:16px; flex-wrap:wrap; margin-bottom:24px;">
+                    <div class="stat-card" style="flex:1; min-width:160px;">
+                        <div class="stat-label">Total Submitted</div>
+                        <div class="stat-value" id="report-stat-total">—</div>
+                    </div>
+                    <div class="stat-card" style="flex:1; min-width:160px;">
+                        <div class="stat-label">Pending Review</div>
+                        <div class="stat-value" id="report-stat-pending" style="color:var(--accent-amber);">—</div>
+                    </div>
+                    <div class="stat-card" style="flex:1; min-width:160px;">
+                        <div class="stat-label">Resolved</div>
+                        <div class="stat-value" id="report-stat-resolved" style="color:var(--accent-green);">—</div>
+                    </div>
+                    <div class="stat-card" style="flex:1; min-width:160px;">
+                        <div class="stat-label">Dismissed</div>
+                        <div class="stat-value" id="report-stat-dismissed" style="color:var(--text-muted);">—</div>
+                    </div>
+                </div>
+
+                <!-- New Report Issue CTA -->
+                <div class="card-panel" style="margin-bottom:20px; border-left:4px solid var(--accent-amber);">
+                    <div style="display:flex; align-items:center; gap:14px;">
+                        <i data-lucide="shield-alert" style="width:32px;height:32px;color:var(--accent-amber); flex-shrink:0;"></i>
+                        <div style="flex:1;">
+                            <h3 style="margin:0 0 4px; font-size:0.95rem;">Report an Issue</h3>
+                            <p style="margin:0; font-size:0.82rem; color:var(--text-muted);">Experiencing harassment, spam, or suspicious activity? Submit a detailed report from within any chat using the <strong>flag icon</strong> on a message, or the <strong>Report User</strong> option in the chat menu.</p>
+                        </div>
+                        <button class="action-btn warn" id="report-help-nav-btn" style="white-space:nowrap; flex-shrink:0;">
+                            <i data-lucide="message-square" style="width:14px;height:14px;margin-right:6px;"></i>
+                            Go to Chats
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Reports Table -->
+                <div class="card-panel">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+                        <h2 style="margin:0;">Submitted Reports History</h2>
+                        <button class="action-btn sm" id="refresh-reports-btn">
+                            <i data-lucide="refresh-cw" style="width:13px;height:13px;margin-right:5px;"></i> Refresh
+                        </button>
+                    </div>
+                    <div class="crypto-table-wrapper">
+                        <table class="crypto-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Reported User</th>
+                                    <th>Reason</th>
+                                    <th>Details</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="my-reports-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/quantum_flow.js') }}?v=2.5.2"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}?v=2.5.2"></script>
+    <script>
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const sidebarCloseBtn = document.getElementById('sidebar-close-btn');
+        const sidebar = document.querySelector('.sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+
+        function openMobileSidebar(e) {
+            if (e) e.stopPropagation();
+            if (sidebar) sidebar.classList.add('open');
+            if (overlay) overlay.classList.add('open');
+        }
+
+        function closeMobileSidebar(e) {
+            if (e) e.stopPropagation();
+            if (sidebar) sidebar.classList.remove('open');
+            if (overlay) overlay.classList.remove('open');
+        }
+
+        if (hamburgerBtn) hamburgerBtn.addEventListener('click', openMobileSidebar);
+        if (sidebarCloseBtn) sidebarCloseBtn.addEventListener('click', closeMobileSidebar);
+        if (overlay) overlay.addEventListener('click', closeMobileSidebar);
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', () => { 
+                if (item.classList.contains('nav-group-header')) return; // Do not close mobile drawer when toggling submenu
+                if (window.innerWidth <= 768) { 
+                    closeMobileSidebar();
+                } 
+            });
+        });
+        function switchTab(sectionId) {
+            if (typeof navigateTo === 'function') {
+                navigateTo(sectionId);
+            } else {
+                document.querySelectorAll('.nav-item').forEach(n => {
+                    if (!n.classList.contains('nav-group-header')) n.classList.remove('active');
+                });
+                document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+                const targetNav = document.querySelector(`.nav-item[data-target="${sectionId}"]`);
+                if (targetNav) targetNav.classList.add('active');
+                const targetSection = document.getElementById(sectionId);
+                if (targetSection) targetSection.classList.add('active');
+
+                const secGroup = document.getElementById('nav-group-security');
+                const securitySections = ['crypto-lab-section', 'benchmark-section', 'audit-section'];
+                if (secGroup) {
+                    if (securitySections.includes(sectionId)) {
+                        secGroup.classList.add('open');
+                        secGroup.classList.add('has-active');
+                    } else {
+                        secGroup.classList.remove('has-active');
+                    }
+                }
+            }
+        }
+
+        // ── Theme Toggle ──────────────────────────────────────────────────────
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            if (document.body) document.body.setAttribute('data-theme', theme);
+            localStorage.setItem('pqc-theme', theme);
+            const iconName = theme === 'dark' ? 'moon' : 'sun';
+            document.querySelectorAll('#desktop-theme-toggle, #mobile-theme-toggle')
+                    .forEach(btn => {
+                        btn.innerHTML = `<i data-lucide="${iconName}"></i>`;
+                    });
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function toggleTheme(e) {
+            if (e && e.preventDefault) e.preventDefault();
+            const current = document.documentElement.getAttribute('data-theme') || 'dark';
+            const next = current === 'dark' ? 'light' : 'dark';
+            applyTheme(next);
+        }
+
+        // Apply saved theme immediately on page load
+        applyTheme(localStorage.getItem('pqc-theme') || 'dark');
+
+        // Single delegated click handler as fallback
+        document.addEventListener('click', function(e) {
+            const btn = e.target.closest('#desktop-theme-toggle, #mobile-theme-toggle');
+            if (btn) {
+                toggleTheme(e);
+            }
+        });
+
+        // Initialize Lucide icons on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) lucide.createIcons();
+        });
+    </script>
+
+    <!-- Floating Quantum Bottom Toast Notification Container -->
+    <div id="quantum-toast-container" class="quantum-toast-container"></div>
+</body>
+</html>

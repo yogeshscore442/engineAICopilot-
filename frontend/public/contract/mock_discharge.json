@@ -1,0 +1,89 @@
+{
+  "record_id": "mock-discharge-001",
+  "doc_type": "discharge_summary",
+  "doc_date": "2024-11-28",
+  "language": "en",
+  "patient_name_present": true,
+  "medicines": [
+    {
+      "name_raw": "Metformin 500mg",
+      "generic": "Metformin",
+      "strength": "500 mg",
+      "schedule_raw": "1-0-1",
+      "schedule_parsed": ["morning", "night"],
+      "food_instruction": "after_food",
+      "duration_days": 90,
+      "confidence": 0.94,
+      "bbox": [0.1, 0.45, 0.3, 0.1]
+    },
+    {
+      "name_raw": "Amlodipine 5mg",
+      "generic": "Amlodipine",
+      "strength": "5 mg",
+      "schedule_raw": "1-0-0",
+      "schedule_parsed": ["morning"],
+      "food_instruction": "null",
+      "duration_days": 90,
+      "confidence": 0.9,
+      "bbox": [0.1, 0.5, 0.28, 0.08]
+    },
+    {
+      "name_raw": "Atorvastatin 20mg",
+      "generic": "Atorvastatin",
+      "strength": "20 mg",
+      "schedule_raw": "0-0-1",
+      "schedule_parsed": ["night"],
+      "food_instruction": "after_food",
+      "duration_days": 90,
+      "confidence": 0.88,
+      "bbox": [0.1, 0.55, 0.32, 0.08]
+    }
+  ],
+  "tests": [
+    {
+      "name": "HbA1c",
+      "loinc": "4548-4",
+      "value": 7.5,
+      "unit": "%",
+      "ref_low": 4.0,
+      "ref_high": 5.6,
+      "flag": "HIGH",
+      "explanation_en": "Diabetes control needs improvement. HbA1c above 7% indicates average blood sugar has been high.",
+      "explanation_ta": "மதுமேக கட்டுப்பாடு மேம்படுத்த வேண்டும். HbA1c 7% அற்ப tổ daha yüksek, இதனால் சராசரி இரத்த சர்க்கரை அதிகமாக ollutதாக காட்டுகிறது.",
+      "confidence": 0.91,
+      "bbox": [0.2, 0.2, 0.25, 0.08]
+    },
+    {
+      "name": "Blood Pressure",
+      "loinc": "8480-6",
+      "value": 145,
+      "unit": "mmHg",
+      "ref_low": 90,
+      "ref_high": 120,
+      "flag": "HIGH",
+      "explanation_en": "Systolic blood pressure is elevated. This confirms hypertension diagnosis.",
+      "explanation_ta": "சிச్టோலிக் இரத்த அழுத்தம் உயர்ந்துள்ளது. இது உயர் இரத்த அழுத்த நோயை உறுதிப்படுத்துகிறது.",
+      "confidence": 0.96,
+      "bbox": [0.2, 0.3, 0.22, 0.08]
+    }
+  ],
+  "diagnoses": [
+    {
+      "text": "Type 2 Diabetes Mellitus",
+      "confidence": 0.9
+    },
+    {
+      "text": "Essential Hypertension",
+      "confidence": 0.88
+    },
+    {
+      "text": "Dyslipidemia",
+      "confidence": 0.82
+    }
+  ],
+  "summary_en": "Patient admitted for uncontrolled diabetes and hypertension. Discharged on Metformin 500mg twice daily, Amlodipine 5mg once daily morning, Atorvastatin 20mg at night. Follow-up in 2 weeks for medication titration. HbA1c 7.5% and BP 145/92 indicate need for tighter control.",
+  "summary_ta": "கட்டுப்படுத்தப்படாத மಧுமேகம் மற்றும் உயர் இரத்த அழுத்தத்திற்காக அனுபவிக்கப்பட்டோர். மெட்ஃபார்மின் 500mg நாளில் இரண்டு முறை, அம்லோடிப்பைன் 5mg காலை ஒரு முறை, ஆட்டோர்வாஸ்டாடின் 20mg இரவு வெளியேற்றப்பட்டார். 2 வாரங்கள் பின்பு மருன் சரிசெய்தலுக்குச் செக்கப். HbA1c 7.5% மற்றும் BP 145/92 கட்டுப்பாட்டைத் திருத்த வேண்டும்.",
+  "needs_review": ["tests[0]", "medicines[0]"],
+  "disclaimer": "This is AI-generated information to help you understand your records. It is not a diagnosis or medical advice. Please consult your doctor.",
+  "error": null
+}

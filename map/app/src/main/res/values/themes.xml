@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.MedicalNavigation" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Calm Care Color Palette -->
+        <item name="colorPrimary">@color/primary_teal</item>
+        <item name="colorPrimaryContainer">@color/primary_light_tint</item>
+        <item name="colorSecondary">@color/accent_sky_blue</item>
+        <item name="colorSecondaryContainer">#FFE0F2FE</item>
+        <item name="colorTertiary">@color/success_green</item>
+        <item name="colorError">@color/emergency_crimson</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorSurfaceContainerHigh">@color/surface_container_high</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/on_surface_variant</item>
+        <item name="colorOutline">@color/outline</item>
+        <item name="colorOutlineVariant">@color/outline_variant</item>
+        
+        <!-- Window & Status Bar -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+</resources>

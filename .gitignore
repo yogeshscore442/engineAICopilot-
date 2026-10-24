@@ -1,0 +1,15 @@
+*.zip
+__pycache__/
+*.pyc
+.env
+.venv/
+node_modules/
+.pytest_cache/
+dist/
+build/
+**/build/
+.gradle/
+**/.gradle/
+local.properties
+*.class
+engineAICOpilot/

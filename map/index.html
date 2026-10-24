@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Medical Maps - High-Resolution Satellite Medical Navigation for Hospitals, Emergency & Pharmacies with Zero API Key">
+  <title>Google Medical Maps - Satellite Hospital & Emergency Navigation</title>
+
+  <!-- Google Fonts: Roboto & Google Sans style -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Google Maps Style CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="gmap-theme">
+
+  <!-- Fullscreen Satellite & Map Viewport -->
+  <div id="leafletMap" class="full-map"></div>
+
+  <!-- Google Maps Top Floating Search Bar & Pills -->
+  <header class="gmap-top-bar" id="topBar">
+    <div class="gmap-searchbox-card">
+      <button class="gmap-menu-btn" id="btnToggleSideDrawer" title="Medical Directory Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <div class="gmap-search-input-wrap">
+        <input type="text" id="gmapSearchInput" placeholder="Search hospitals, emergency, ICU, pharmacies..." autocomplete="off" spellcheck="false">
+      </div>
+
+      <button class="gmap-search-btn" id="btnExecuteSearch" title="Search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+
+      <button class="gmap-clear-btn" id="btnClearSearch" title="Clear search" style="display: none;">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="search-divider"></div>
+
+      <button class="gmap-directions-btn" id="btnQuickDirections" title="Directions to nearest 24/7 Emergency">
+        <i class="fa-solid fa-diamond-turn-right"></i>
+      </button>
+    </div>
+
+    <!-- Active Medical Filter Indicator -->
+    <div class="medical-exclusive-ribbon">
+      <span class="ribbon-pulse"></span>
+      <i class="fa-solid fa-shield-halved"></i>
+      <span><strong>MEDICAL ONLY:</strong> Non-medical shops & restaurants are 100% filtered out</span>
+    </div>
+
+    <!-- Google Maps Horizontal Category Chips -->
+    <nav class="gmap-chips-bar" id="categoryChipsBar">
+      <button class="gmap-chip active" data-filter="all">
+        <i class="fa-solid fa-house-medical"></i> All Medical (<span id="countAll">--</span>)
+      </button>
+      <button class="gmap-chip emergency-chip" data-filter="emergency">
+        <span class="emergency-pulse-dot"></span> 🚨 24/7 Emergency (<span id="countEmergency">--</span>)
+      </button>
+      <button class="gmap-chip" data-filter="hospital">
+        <i class="fa-solid fa-hospital"></i> 🏥 Hospitals (<span id="countHospital">--</span>)
+      </button>
+      <button class="gmap-chip" data-filter="pharmacy">
+        <i class="fa-solid fa-pills"></i> 💊 24/7 Medicals (<span id="countPharmacy">--</span>)
+      </button>
+      <button class="gmap-chip" data-filter="clinic">
+        <i class="fa-solid fa-stethoscope"></i> 🩺 Clinics (<span id="countClinic">--</span>)
+      </button>
+      <button class="gmap-chip" data-filter="bloodbank">
+        <i class="fa-solid fa-droplet"></i> 🩸 Blood Banks (<span id="countBloodBank">--</span>)
+      </button>
+      <button class="gmap-chip osm-fetch-chip" id="btnFetchOsm" title="Fetch live real hospitals in this satellite view">
+        <i class="fa-solid fa-satellite-dish"></i> Fetch Live OSM Data
+      </button>
+    </nav>
+  </header>
+
+  <!-- Google Maps Left Sliding Panel: Medical Directory / Search Results -->
+  <aside class="gmap-side-panel" id="sidePanel">
+    <div class="panel-header-tab">
+      <div class="panel-title-group">
+        <h2 class="panel-title">Medical Directory</h2>
+        <span class="panel-subtitle"><i class="fa-solid fa-shield-halved"></i> Strictly Medical POIs • Real Satellite</span>
+      </div>
+      <button class="panel-close-btn" id="btnCloseSidePanel" title="Close Panel">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <!-- Emergency SOS Quick Dial Banner -->
+    <div class="sos-banner">
+      <div class="sos-icon-box">
+        <i class="fa-solid fa-truck-medical"></i>
+      </div>
+      <div class="sos-text">
+        <strong>Direct Emergency Dispatch</strong>
+        <span>Toll-free 24/7 Ambulance Hotline</span>
+      </div>
+      <a href="tel:108" class="sos-btn" id="btnSosCall">
+        <i class="fa-solid fa-phone"></i> Call 108
+      </a>
+    </div>
+
+    <!-- Scrollable Facility Cards -->
+    <div class="facility-feed" id="facilityFeed">
+      <!-- Injected dynamically by app.js -->
+    </div>
+  </aside>
+
+  <!-- Google Maps Facility Details Inspection Card (Floating Left Sheet) -->
+  <div class="gmap-detail-card" id="detailCard" style="display: none;">
+    <button class="detail-close-btn" id="btnCloseDetail" title="Close">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <!-- Top Medical Header -->
+    <div class="detail-header-block">
+      <div class="detail-badge-pill" id="detailTypeBadge">
+        <i class="fa-solid fa-hospital"></i> <span>Hospital</span>
+      </div>
+      <h1 class="detail-name" id="detailName">Apollo Speciality Hospital</h1>
+      <div class="detail-rating-row">
+        <span class="rating-number" id="detailRating">4.7</span>
+        <div class="stars" id="detailStars">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+        </div>
+        <span class="reviews-count" id="detailReviews">(3,842 reviews)</span>
+        <span class="dot-separator">•</span>
+        <span class="category-text" id="detailCategory">Multi-Speciality Hospital</span>
+      </div>
+    </div>
+
+    <!-- Google Maps Action Buttons Row (Directions, Route, Call, Share) -->
+    <div class="detail-actions-bar">
+      <button class="gmap-action-btn primary-action" id="btnStartNavigation">
+        <i class="fa-solid fa-diamond-turn-right"></i>
+        <span>Directions</span>
+      </button>
+      <a href="#" class="gmap-action-btn call-action" id="btnCallFacility">
+        <i class="fa-solid fa-phone"></i>
+        <span>Call</span>
+      </a>
+      <button class="gmap-action-btn" id="btnSaveFacility">
+        <i class="fa-solid fa-bookmark"></i>
+        <span>Save</span>
+      </button>
+      <button class="gmap-action-btn" id="btnShareFacility">
+        <i class="fa-solid fa-share-nodes"></i>
+        <span>Share</span>
+      </button>
+    </div>
+
+    <!-- Live Hospital Status Bar (ICU beds, Emergency Status) -->
+    <div class="detail-status-strip" id="detailStatusStrip">
+      <div class="status-item icu-status" id="detailIcuItem">
+        <i class="fa-solid fa-bed-pulse"></i>
+        <div>
+          <strong id="detailIcuCount">14 Beds</strong>
+          <span>ICU Available</span>
+        </div>
+      </div>
+      <div class="status-item 24h-status">
+        <i class="fa-solid fa-clock"></i>
+        <div>
+          <strong id="detailOpenStatus">Open 24 Hours</strong>
+          <span>Emergency Services</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Verified Info List (Address, Phone, Specialities) -->
+    <div class="detail-info-list">
+      <div class="info-row">
+        <i class="fa-solid fa-location-dot info-icon"></i>
+        <div class="info-text">
+          <span id="detailAddress">21, Greams Lane, Off Greams Road, Thousand Lights, Chennai, TN 600006</span>
+        </div>
+      </div>
+
+      <div class="info-row">
+        <i class="fa-solid fa-phone info-icon"></i>
+        <div class="info-text">
+          <span id="detailPhone">+91 44 2829 0200</span>
+        </div>
+      </div>
+
+      <div class="info-row">
+        <i class="fa-solid fa-stethoscope info-icon"></i>
+        <div class="info-text">
+          <div class="specs-cloud" id="detailSpecsCloud">
+            <!-- Specialities injected here -->
+          </div>
+        </div>
+      </div>
+
+      <div class="info-row">
+        <i class="fa-solid fa-road info-icon"></i>
+        <div class="info-text">
+          <span id="detailDistance">1.2 km away • ~4 mins drive</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Google Maps Turn-by-Turn Driving Navigation HUD (Active Route Mode) -->
+  <div class="gmap-nav-hud" id="navHud" style="display: none;">
+    <!-- Green Navigation Banner -->
+    <div class="nav-green-card">
+      <div class="nav-maneuver-icon" id="navManeuverIcon">
+        <i class="fa-solid fa-arrow-up"></i>
+      </div>
+      <div class="nav-text-block">
+        <div class="nav-instruction" id="navInstruction">Head north on Greams Lane</div>
+        <div class="nav-subinstruction" id="navSubInstruction">Towards Anna Salai • Emergency Route</div>
+      </div>
+      <button class="nav-voice-btn" id="btnToggleVoice" title="Toggle Voice Guidance">
+        <i class="fa-solid fa-volume-high"></i>
+      </button>
+    </div>
+
+    <!-- Bottom Trip Metrics Card -->
+    <div class="nav-bottom-card">
+      <div class="trip-stats">
+        <div class="trip-time" id="navEtaMinutes">4 min</div>
+        <div class="trip-meta">
+          <span class="trip-distance" id="navRemainingDistance">1.2 km</span>
+          <span class="trip-arrival" id="navArrivalTime">19:48</span>
+        </div>
+      </div>
+      <div class="trip-controls">
+        <button class="nav-recenter-btn" id="btnNavRecenter" title="Re-center on Ambulance">
+          <i class="fa-solid fa-location-crosshairs"></i>
+        </button>
+        <button class="nav-exit-btn" id="btnNavExit" title="Exit Navigation">
+          <i class="fa-solid fa-xmark"></i> Exit
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Google Maps Bottom-Left Layer Switcher (Satellite ⇄ Standard ⇄ Dark) -->
+  <div class="gmap-layer-thumbnail" id="layerThumbnail" title="Switch between Satellite and Standard Map">
+    <div class="thumb-img-wrapper" id="thumbImgWrapper">
+      <span class="thumb-label" id="thumbLabel">Default Map</span>
+    </div>
+  </div>
+
+  <!-- Google Maps Bottom-Right Control Stack -->
+  <div class="gmap-controls-stack">
+    <!-- Center to User Location -->
+    <button class="gmap-control-btn" id="btnGpsLocation" title="Show your location">
+      <i class="fa-solid fa-location-crosshairs"></i>
+    </button>
+    <!-- Reset View to City Medical Center -->
+    <button class="gmap-control-btn" id="btnResetMedicalHub" title="Reset View to Medical District">
+      <i class="fa-solid fa-compass"></i>
+    </button>
+    <!-- Zoom Controls -->
+    <div class="gmap-zoom-group">
+      <button class="gmap-control-btn zoom-btn" id="btnZoomIn" title="Zoom in">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+      <div class="zoom-divider"></div>
+      <button class="gmap-control-btn zoom-btn" id="btnZoomOut" title="Zoom out">
+        <i class="fa-solid fa-minus"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Leaflet JS (Zero API Key) -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <!-- Google Maps Application Logic -->
+  <script src="app.js"></script>
+</body>
+</html>

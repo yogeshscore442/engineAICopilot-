@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Medical Navigation Map</string>
+    <string name="default_location_permission_rationale">This app needs location access to show your position on the map and provide turn-by-turn navigation to medical facilities.</string>
+    <string name="permission_denied_explanation">Location permission is required for navigation features. Please enable it in settings.</string>
+</resources>

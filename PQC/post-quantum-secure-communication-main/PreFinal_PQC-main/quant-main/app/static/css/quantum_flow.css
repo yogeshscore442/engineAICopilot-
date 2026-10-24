@@ -1,0 +1,316 @@
+/* ═════════════════════════════════════════════════════════════════════
+   CINEMATIC 3D QUANTUM BREACH & ENTRY PORTAL (MODEL 5: WAVE TELEPORTATION)
+   ═════════════════════════════════════════════════════════════════════ */
+
+#quantum-login-portal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999999;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #02040a;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease-out;
+}
+
+#quantum-login-portal.active {
+    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* 3D WebGL Canvas Layer */
+#quantum-canvas-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+#quantum-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Cybernetic Grid & Vignette Overlay */
+.quantum-grid-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+    background: 
+        radial-gradient(circle at 50% 50%, transparent 20%, rgba(2, 4, 10, 0.7) 70%, #02040a 100%),
+        linear-gradient(rgba(0, 230, 118, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 230, 118, 0.04) 1px, transparent 1px);
+    background-size: 100% 100%, 50px 50px, 50px 50px;
+}
+
+/* Blinding Quantum Flash Transition Overlay */
+.quantum-flash-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 50%, #ffffff 0%, #00e676 40%, transparent 80%);
+    opacity: 0;
+    transition: opacity 0.25s cubic-bezier(0.1, 0.9, 0.2, 1);
+}
+
+.quantum-flash-overlay.flashing {
+    opacity: 1;
+}
+
+/* Minimal Holographic Cyber HUD */
+.quantum-warp-hud {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* Concentric Rotating Cyber Ring Behind Text */
+.quantum-warp-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 440px;
+    height: 440px;
+    border-radius: 50%;
+    border: 1px dashed rgba(0, 230, 118, 0.25);
+    animation: warpRingRotate 18s linear infinite;
+    pointer-events: none;
+}
+
+.quantum-warp-ring::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    border-radius: 50%;
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    animation: warpRingRotateRev 12s linear infinite;
+}
+
+@keyframes warpRingRotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes warpRingRotateRev {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
+}
+
+.quantum-warp-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 680px;
+    padding: 24px 30px;
+    background: rgba(10, 16, 30, 0.7);
+    border: 1px solid rgba(0, 230, 118, 0.35);
+    border-radius: 20px;
+    box-shadow: 0 0 50px rgba(0, 230, 118, 0.15), inset 0 0 25px rgba(0, 230, 118, 0.05);
+    backdrop-filter: blur(16px);
+    transform: translateY(30px);
+}
+
+.quantum-warp-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #00e676;
+    margin-bottom: 10px;
+}
+
+.quantum-pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #00e676;
+    box-shadow: 0 0 10px #00e676;
+    animation: pulseDot 1.2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+    0%, 100% { transform: scale(0.8); opacity: 0.6; }
+    50% { transform: scale(1.4); opacity: 1; box-shadow: 0 0 16px #00e676; }
+}
+
+.quantum-warp-title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    text-shadow: 0 0 20px rgba(0, 230, 118, 0.6);
+}
+
+.quantum-warp-spec {
+    font-size: 0.75rem;
+    color: #38bdf8;
+    margin-bottom: 18px;
+    letter-spacing: 1px;
+}
+
+.quantum-warp-progress-box {
+    width: 100%;
+    max-width: 480px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    margin-bottom: 16px;
+}
+
+.quantum-warp-progress-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #0284c7, #00e676, #38bdf8);
+    border-radius: 999px;
+    box-shadow: 0 0 14px #00e676;
+    transition: width 0.12s linear;
+}
+
+.quantum-warp-terminal {
+    font-size: 0.8rem;
+    color: #e2e8f0;
+    min-height: 24px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.quantum-warp-skip {
+    position: absolute;
+    bottom: 35px;
+    right: 40px;
+    pointer-events: auto;
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #94a3b8;
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-size: 0.74rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(8px);
+}
+
+.quantum-warp-skip:hover {
+    color: #f8fafc;
+    background: rgba(30, 41, 59, 0.9);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Modern Vector Icon Styling */
+.lucide {
+    display: inline-block;
+    vertical-align: middle;
+    stroke-width: 1.85px;
+}
+
+.nav-item .lucide {
+    width: 18px;
+    height: 18px;
+    margin-right: 12px;
+    color: var(--text-muted);
+    transition: all 0.2s ease;
+}
+
+.nav-item.active .lucide,
+.nav-item:hover .lucide {
+    color: var(--color-primary);
+    filter: drop-shadow(0 0 6px var(--color-primary-glow));
+}
+
+.sidebar-logo .lucide,
+.auth-logo-badge .lucide {
+    color: var(--color-primary);
+    filter: drop-shadow(0 0 8px var(--color-primary-glow));
+}
+
+.chat-header-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 9px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.chat-header-icon-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #f8fafc;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.chat-header-icon-btn .lucide {
+    width: 16px;
+    height: 16px;
+}
+
+.auth-logo-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    background: rgba(0, 230, 118, 0.08);
+    border: 1px solid rgba(0, 230, 118, 0.28);
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+    box-shadow: 0 0 16px rgba(0, 230, 118, 0.12);
+}
+
+.sidebar-logo svg {
+    -webkit-text-fill-color: initial;
+    stroke: var(--color-primary);
+    vertical-align: text-bottom;
+    margin-right: 6px;
+}

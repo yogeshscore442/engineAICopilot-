@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PQC Secure Communication Platform & Security Laboratory</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/quantum_flow.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <!-- Modern Lucide Vector Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <!-- Three.js Hardware Accelerated WebGL Engine -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+    <!-- CINEMATIC 3D QUANTUM BREACH & ENTRY PORTAL (MODEL 5: WAVE TELEPORTATION) -->
+    <div id="quantum-login-portal">
+        <div class="quantum-flash-overlay" id="quantum-flash-overlay"></div>
+        <div class="quantum-grid-overlay"></div>
+        <div id="quantum-canvas-container"></div>
+
+        <!-- Minimal Holographic Cyber HUD -->
+        <div class="quantum-warp-hud">
+            <div class="quantum-warp-ring"></div>
+            <div class="quantum-warp-center">
+                <div class="quantum-warp-badge">
+                    <span class="quantum-pulse-dot"></span>
+                    <span>QUANTUM PORTAL BREACH SEQUENCE</span>
+                </div>
+                <div class="quantum-warp-title" id="quantum-warp-title">INITIATING TELEPORTATION MATRIX</div>
+                <div class="quantum-warp-spec" id="quantum-warp-spec">Bell State |Φ⁺⟩ Entanglement Active • 2048 Qubits • ML-KEM-768</div>
+                
+                <div class="quantum-warp-progress-box">
+                    <div class="quantum-warp-progress-bar" id="quantum-warp-bar"></div>
+                </div>
+                
+                <div class="quantum-warp-terminal" id="quantum-warp-terminal">
+                    > Synchronizing de Broglie wave interference...
+                </div>
+            </div>
+            <button type="button" class="quantum-warp-skip" id="quantum-warp-skip" title="Skip to Dashboard">
+                Skip to Dashboard <i data-lucide="chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- AUTHENTICATION VIEW -->
+    <div id="auth-section" class="auth-wrapper">
+        <!-- Top-Right Cyber Day/Night Theme Switcher -->
+        <div class="auth-top-actions">
+            <div class="cyber-theme-switch-wrap" id="auth-theme-toggle" title="Toggle Light / Dark Mode">
+                <div class="cyber-theme-pill">
+                    <span class="theme-icon-slot day-slot"><i data-lucide="sun"></i></span>
+                    <span class="theme-slider-thumb"></span>
+                    <span class="theme-icon-slot night-slot"><i data-lucide="moon"></i></span>
+                </div>
+                <span class="theme-mode-label">DARK</span>
+            </div>
+        </div>
+
+        <div class="auth-card">
+            <div class="auth-logo-badge"><i data-lucide="shield-check"></i> PQC PLATFORM</div>
+            <h1 class="auth-logo">PQC SECURE COMM</h1>
+            <p class="auth-subtitle">Post-Quantum Cryptography Chat, Mail, File Sharing & Attack Laboratory</p>
+            
+            <!-- Login -->
+            <div id="login-box">
+                <form id="login-form">
+                    <div class="form-group">
+                        <label class="form-label" for="login-username">Username</label>
+                        <input class="form-input" type="text" id="login-username" required placeholder="e.g. alice">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="login-password">Password</label>
+                        <div class="password-input-wrapper">
+                            <input class="form-input" type="password" id="login-password" required placeholder="••••••••">
+                            <button type="button" class="password-toggle-btn" id="login-password-toggle" title="Show / Hide Password" aria-label="Toggle password visibility">
+                                <svg class="eye-icon eye-open" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                <svg class="eye-icon eye-closed" style="display:none;" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <button class="auth-btn" type="submit"><i data-lucide="lock" style="width:16px;height:16px;margin-right:6px;"></i> Log In to Secure Platform</button>
+                </form>
+                <div class="auth-toggle">
+                    Need an identity? <span id="toggle-to-register">Register new user</span>
+                </div>
+            </div>
+            
+            <!-- Register -->
+            <div id="register-box" style="display: none;">
+                <form id="register-form">
+                    <div class="form-group">
+                        <label class="form-label" for="register-username">Desired Username</label>
+                        <input class="form-input" type="text" id="register-username" required placeholder="e.g. bob">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="register-password">Password (min 6 chars)</label>
+                        <div class="password-input-wrapper">
+                            <input class="form-input" type="password" id="register-password" required placeholder="••••••••">
+                            <button type="button" class="password-toggle-btn" id="register-password-toggle" title="Show / Hide Password" aria-label="Toggle password visibility">
+                                <svg class="eye-icon eye-open" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                <svg class="eye-icon eye-closed" style="display:none;" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <p class="crypto-note">Upon registration, a full identity suite will be generated: RSA-2048, ML-DSA-65, SLH-DSA, and X25519.</p>
+                    <button class="auth-btn" type="submit">Generate Cryptographic Identity</button>
+                </form>
+                <div class="auth-toggle">
+                    Already registered? <span id="toggle-to-login">Log in here</span>
+                </div>
+            </div>
+            
+            <div id="auth-error" class="auth-error-msg"></div>
+        </div>
+    </div>
+
+    <!-- MAIN APP LAYOUT -->
+    <div id="app-layout" class="app-container" style="display: none;">
+
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+        <!-- Mobile Topbar -->
+        <div class="mobile-topbar">
+            <button class="hamburger-btn" id="hamburger-btn"><i data-lucide="menu"></i></button>
+            <span class="mobile-topbar-logo"><i data-lucide="shield-check"></i> PQC PLATFORM</span>
+            <div class="cyber-theme-switch-wrap mobile-theme-wrap" id="mobile-theme-toggle" title="Toggle Light / Dark Mode">
+                <div class="cyber-theme-pill">
+                    <span class="theme-icon-slot day-slot"><i data-lucide="sun"></i></span>
+                    <span class="theme-slider-thumb"></span>
+                    <span class="theme-icon-slot night-slot"><i data-lucide="moon"></i></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-brand-wrapper">
+                    <div class="pqc-live-icon-container" id="pqc-live-icon-trigger" title="Post-Quantum Secure Shield (Hover for details)">
+                        <!-- Live Quantum Holographic Icon -->
+                        <div class="pqc-live-quantum-icon">
+                            <span class="pqc-orbit-halo"></span>
+                            <span class="pqc-orbit-ellipse ellipse-1"></span>
+                            <span class="pqc-orbit-ellipse ellipse-2"></span>
+                            <div class="pqc-lock-core-wrap">
+                                <svg class="pqc-live-lock-svg" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path class="pqc-live-shackle" d="M8 12V8C8 4.68629 10.6863 2 14 2C17.3137 2 20 4.68629 20 8V12" stroke="url(#pqc-svg-grad-1)" stroke-width="2.6" stroke-linecap="round"/>
+                                    <rect class="pqc-live-body" x="4.5" y="11" width="19" height="14.5" rx="3.5" fill="url(#pqc-svg-grad-body)" stroke="url(#pqc-svg-grad-border)" stroke-width="1.8"/>
+                                    <path d="M7.5 15H10.5M17.5 15H20.5" stroke="#00F0FF" stroke-width="1" stroke-linecap="round" opacity="0.85"/>
+                                    <path d="M8.5 20.5H11M17 20.5H19.5" stroke="#00E676" stroke-width="1" stroke-linecap="round" opacity="0.85"/>
+                                    <circle cx="14" cy="17" r="2" fill="#00E676" class="pqc-key-glow-core"/>
+                                    <path d="M13.1 17.8L12.5 21.8H15.5L14.9 17.8Z" fill="#00E676"/>
+                                    <defs>
+                                        <linearGradient id="pqc-svg-grad-1" x1="8" y1="2" x2="20" y2="12" gradientUnits="userSpaceOnUse">
+                                            <stop offset="0%" stop-color="#00F0FF"/>
+                                            <stop offset="100%" stop-color="#00E676"/>
+                                        </linearGradient>
+                                        <linearGradient id="pqc-svg-grad-border" x1="4.5" y1="11" x2="23.5" y2="25.5" gradientUnits="userSpaceOnUse">
+                                            <stop offset="0%" stop-color="#00F0FF"/>
+                                            <stop offset="100%" stop-color="#00E676"/>
+                                        </linearGradient>
+                                        <linearGradient id="pqc-svg-grad-body" x1="4.5" y1="11" x2="23.5" y2="25.5" gradientUnits="userSpaceOnUse">
+                                            <stop offset="0%" stop-color="#0B1726"/>
+                                            <stop offset="100%" stop-color="#040C15"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                <span class="pqc-quantum-sparkle s1"></span>
+                                <span class="pqc-quantum-sparkle s2"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="sidebar-logo">PQC SECURE</h2>
+                </div>
+                <span class="sidebar-version">v2.5 PQC STACK</span>
+            </div>
+            
+            <nav class="nav-menu">
+                <li class="nav-item active" data-target="dashboard-section"><i data-lucide="layout-dashboard"></i> Dashboard</li>
+                <li class="nav-item" data-target="chat-section"><i data-lucide="message-square-lock"></i> Secure Chat</li>
+                <li class="nav-item" data-target="mail-section"><i data-lucide="mail"></i> Secure Mail</li>
+                <li class="nav-item" data-target="files-section"><i data-lucide="folder-lock"></i> Encrypted Files</li>
+                <li class="nav-item" data-target="attack-section"><i data-lucide="swords"></i> Attack Lab</li>
+                <li class="nav-item" data-target="crypto-lab-section"><i data-lucide="flask-conical"></i> Crypto Lab</li>
+                <li class="nav-item" data-target="benchmark-section"><i data-lucide="bar-chart-3"></i> Benchmarks</li>
+                <li class="nav-item" data-target="audit-section"><i data-lucide="scroll-text"></i> Audit Logs</li>
+                <li class="nav-item" data-target="keys-section"><i data-lucide="key-round"></i> Key Management</li>
+            </nav>
+        </aside>
+
+        <!-- Main Content View -->
+        <main class="main-content">
+            <!-- Global Top Navigation Bar (Right-Aligned Controls) -->
+            <header class="app-global-header">
+                <div class="header-left-status">
+                    <span class="system-status-indicator">
+                        <span class="status-pulse-ring"></span>
+                        <i data-lucide="shield-check" style="width:14px;height:14px;margin-right:4px;"></i>
+                        <span>PQC QUANTUM-SAFE ACTIVE</span>
+                    </span>
+                    <span class="crypto-chip">NIST FIPS 203 • ML-KEM-768</span>
+                </div>
+                
+                <div class="header-right-actions">
+                    <!-- Advanced Cyber Day/Night Pill Switch -->
+                    <div class="cyber-theme-switch-wrap" id="theme-toggle-btn" title="Toggle Light / Dark Mode">
+                        <div class="cyber-theme-pill">
+                            <span class="theme-icon-slot day-slot">
+                                <i data-lucide="sun"></i>
+                            </span>
+                            <span class="theme-slider-thumb"></span>
+                            <span class="theme-icon-slot night-slot">
+                                <i data-lucide="moon"></i>
+                            </span>
+                        </div>
+                        <span class="theme-mode-label">DARK</span>
+                    </div>
+
+                    <div class="header-user-badge" id="header-user-badge" title="Click to view WhatsApp Profile & Security Details" style="cursor: pointer;">
+                        <div class="header-user-avatar" id="header-user-avatar">U</div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- 1. DASHBOARD -->
+            <div id="dashboard-section" class="content-section active">
+                <div class="section-header">
+                    <h1 class="section-title">Cryptographic Control Dashboard</h1>
+                    <p class="section-desc">Real-time indicators, operational stats, and security event summary</p>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <div class="stat-card safe">
+                        <span class="stat-label">Active Handshakes</span>
+                        <span class="stat-val" id="stat-handshakes">0</span>
+                        <span class="stat-desc">X25519 + ML-KEM-768 sessions</span>
+                    </div>
+                    <div class="stat-card classical">
+                        <span class="stat-label">Encrypted Messages</span>
+                        <span class="stat-val" id="stat-messages">0</span>
+                        <span class="stat-desc">AES-256-GCM chat payloads</span>
+                    </div>
+                    <div class="stat-card safe">
+                        <span class="stat-label">Secure Mail Sent</span>
+                        <span class="stat-val" id="stat-emails">0</span>
+                        <span class="stat-desc">@pqc.local encrypted mail</span>
+                    </div>
+                    <div class="stat-card danger">
+                        <span class="stat-label">Attacks Blocked</span>
+                        <span class="stat-val" id="stat-attacks">0</span>
+                        <span class="stat-desc">Tamper / replay / wrong key</span>
+                    </div>
+                </div>
+
+                <!-- LIVE NETWORK ACCESS BANNER -->
+                <div class="card-panel" style="margin-bottom:20px; border-left: 4px solid var(--accent-cyan);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                        <div>
+                            <h2 style="font-size:1.1rem; margin-bottom:4px; display:flex; align-items:center; gap:8px;">
+                                <i data-lucide="network"></i> Real Device Network Access (LAN / Wi-Fi)
+                            </h2>
+                            <p class="section-desc" id="network-lan-info">
+                                Connect mobile phones, laptops, or tablets on your Wi-Fi network: <strong id="lan-url-display" style="color:var(--accent-cyan);">Loading LAN IP...</strong>
+                            </p>
+                        </div>
+                        <div style="display:flex; gap:8px;">
+                            <button class="action-btn pqc" id="prof-demo-start-btn"><i data-lucide="graduation-cap" style="width:16px;height:16px;margin-right:6px;"></i> Start Professor Live Demo</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- REAL-TIME SECURITY MONITOR & PACKET INSPECTOR -->
+                <div class="card-panel" style="margin-bottom:20px;">
+                    <div class="card-title" style="display:flex; justify-content:space-between; align-items:center;">
+                        <span><i data-lucide="radio" style="width:16px;height:16px;margin-right:6px;vertical-align:text-bottom;"></i> Live Network Packet Inspector (Captured Application Payload Stream)</span>
+                        <span class="badge safe" id="packet-stream-badge">LIVE MONITORING</span>
+                    </div>
+                    <div class="crypto-table-wrapper" style="max-height:260px; overflow-y:auto;">
+                        <table class="crypto-table">
+                            <thead>
+                                <tr>
+                                    <th># ID</th>
+                                    <th>Timestamp</th>
+                                    <th>Protocol / Transport</th>
+                                    <th>Crypto Mode</th>
+                                    <th>Ciphertext / Payload Preview</th>
+                                    <th>Nonce / Tag</th>
+                                    <th>Security State</th>
+                                    <th>Deep Inspection</th>
+                                </tr>
+                            </thead>
+                            <tbody id="live-packet-table-body">
+                                <tr>
+                                    <td colspan="8" style="text-align:center; color:var(--text-secondary); padding:20px;">
+                                        Waiting for application chat/email traffic... Send a message in Secure Chat to see live packet capture.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="card-panel">
+                    <div class="card-title"><i data-lucide="activity" style="width:16px;height:16px;margin-right:6px;vertical-align:text-bottom;color:var(--color-primary);"></i> Real-Time Cryptographic Pipeline Telemetry Stream</div>
+                    <div id="dashboard-log-console" class="terminal-box">
+                        <div class="log-entry success">> Cryptographic Engine v2.5 initialized.</div>
+                        <div class="log-entry success">> Native liboqs-9 DLL loaded: ML-KEM-512, ML-KEM-768, ML-KEM-1024 & ML-DSA active.</div>
+                        <div class="log-entry success">> Native Python Cryptography: X25519, AES-256-GCM, ChaCha20-Poly1305, HKDF-SHA-384, SHA3-256/384/512.</div>
+                        <div class="log-entry success">> Ascon-128a NIST SP 800-232 Lightweight IoT AEAD: ACTIVE & BENCHMARKED.</div>
+                        <div class="log-entry success">> Grover's Quantum Effort Estimator Engine: READY.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. SECURE CHAT -->
+            <div id="chat-section" class="content-section">
+                <div class="section-header">
+                    <h1 class="section-title">Real-Time Secure Chat</h1>
+                    <p class="section-desc">1-to-1 & Group Encrypted Messaging (Classical, Modern, PQC, and Hybrid Modes)</p>
+                </div>
+                
+                <div class="chat-layout">
+                    <div class="chat-users-panel">
+                        <div class="chat-search-bar-wrap">
+                            <input type="text" id="chat-search-input" class="chat-search-input" placeholder="Search contacts or groups...">
+                        </div>
+                        <div class="chat-folder-tabs">
+                            <button class="chat-folder-tab active" id="tab-chats-active" onclick="switchChatFolder('active')"><i data-lucide="message-square" style="width:14px;height:14px;margin-right:6px;"></i> Chats</button>
+                            <button class="chat-folder-tab" id="tab-chats-archived" onclick="switchChatFolder('archived')"><i data-lucide="archive" style="width:14px;height:14px;margin-right:6px;"></i> Archived <span id="archived-count-badge" class="chat-tab-count">0</span></button>
+                        </div>
+                        
+                        <div class="panel-header" id="peers-header-label">Peer Connections</div>
+                        <ul class="user-list" id="user-list"></ul>
+                        
+                        <div class="panel-header" style="margin-top:16px;">Group Chats</div>
+                        <button class="action-btn sm" id="create-group-btn"><i data-lucide="user-plus" style="width:14px;height:14px;margin-right:4px;"></i> Create Group</button>
+                        <ul class="group-list" id="group-list"></ul>
+                    </div>
+                    
+                    <div class="chat-room">
+                        <div id="chat-room-placeholder" class="placeholder-box">
+                            <i data-lucide="message-square-lock" style="width:48px;height:48px;color:var(--text-muted);opacity:0.6;margin-bottom:12px;"></i>
+                            <p>Select a peer or group to initiate an encrypted session.</p>
+                        </div>
+                        
+                        <div id="chat-room-active" style="display: none; flex-direction: column; height: 100%;">
+                            <div class="chat-header">
+                                <div class="chat-header-info">
+                                    <button class="mobile-back-btn" id="mobile-back-to-users" title="Back to Contacts">
+                                        <i data-lucide="arrow-left" style="width:18px;height:18px;"></i>
+                                    </button>
+                                    <div class="chat-peer-avatar-wrap">
+                                        <div class="chat-peer-avatar" id="chat-peer-avatar">?</div>
+                                        <span class="chat-peer-radar-dot" id="chat-peer-radar-dot"></span>
+                                    </div>
+                                    <div class="chat-header-meta">
+                                        <div class="chat-peer-title-row">
+                                            <span class="chat-peer-name" id="chat-peer-name">Contact</span>
+                                            <span class="chat-peer-verified-badge" title="Cryptographically Verified Identity">
+                                                <i data-lucide="shield-check" style="width:14px;height:14px;"></i>
+                                            </span>
+                                            <span id="chat-status-badges" style="display:inline-flex; gap:4px;"></span>
+                                        </div>
+                                        <div class="chat-peer-subtitle-row">
+                                            <span class="session-badge" id="session-security-badge">UNSECURED</span>
+                                            <span class="chat-peer-sub" id="chat-peer-sub" style="display:none; font-size:0.75rem; color:var(--text-muted);"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chat-header-actions">
+                                    <!-- Handshake Controls in Header (Restored to original place) -->
+                                    <div class="handshake-control" id="handshake-control-panel">
+                                        <select class="crypto-select" id="crypto-mode-select">
+                                            <option value="Hybrid" selected>Hybrid (X25519 + ML-KEM)</option>
+                                            <option value="PQC">Post-Quantum (ML-KEM)</option>
+                                            <option value="Modern Classical">Modern Classical (X25519)</option>
+                                            <option value="Classical">Classical Baseline (RSA-2048)</option>
+                                        </select>
+                                        <select class="crypto-select" id="nist-level-select" title="NIST FIPS 203 Security Level">
+                                            <option value="3" selected>L3: Balanced (768)</option>
+                                            <option value="1">L1: IoT / Fast (512)</option>
+                                            <option value="5">L5: Military (1024)</option>
+                                        </select>
+                                        <button class="action-btn pqc" id="handshake-btn">Execute Handshake</button>
+                                    </div>
+
+                                    <button class="chat-header-icon-btn" id="search-msg-btn" title="Search in conversation">
+                                        <i data-lucide="search" style="width:16px;height:16px;"></i>
+                                    </button>
+                                    
+                                    <!-- WhatsApp-Style 3-Dots Dropdown Trigger -->
+                                    <div class="chat-menu-dropdown-wrapper">
+                                        <button class="chat-header-icon-btn chat-more-btn" id="chat-more-menu-btn" title="More options">
+                                            <i data-lucide="more-vertical" style="width:18px;height:18px;"></i>
+                                        </button>
+                                        <div class="chat-more-dropdown-menu" id="chat-more-dropdown-menu" style="display: none;">
+                                            <button class="chat-dropdown-item" id="menu-item-info">
+                                                <i data-lucide="info"></i> <span>Contact Info</span>
+                                            </button>
+                                            <button class="chat-dropdown-item" id="menu-item-pin">
+                                                <i data-lucide="pin"></i> <span id="menu-pin-label">Pin Chat</span>
+                                            </button>
+                                            <button class="chat-dropdown-item" id="menu-item-archive">
+                                                <i data-lucide="archive"></i> <span id="menu-archive-label">Archive Chat</span>
+                                            </button>
+                                            <button class="chat-dropdown-item" id="menu-item-lock">
+                                                <i data-lucide="lock"></i> <span id="menu-lock-label">Lock Chat (PIN)</span>
+                                            </button>
+                                            <button class="chat-dropdown-item" id="menu-item-block" style="display:none;">
+                                                <i data-lucide="ban"></i> <span id="menu-block-label">Block Contact</span>
+                                            </button>
+                                            <div class="chat-dropdown-divider"></div>
+                                            <button class="chat-dropdown-item danger" id="menu-item-delete">
+                                                <i data-lucide="trash-2"></i> <span>Delete Chat</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- In-Chat Search Bar -->
+                            <div id="in-chat-search-bar" class="in-chat-search-bar" style="display: none;">
+                                <span style="font-size:0.9rem;"><i data-lucide="search" style="width:14px;height:14px;"></i></span>
+                                <input type="text" id="in-chat-search-input" placeholder="Search keywords in messages...">
+                                <span id="in-chat-search-count" style="font-size:0.75rem; color:var(--text-muted); margin:0 8px;"></span>
+                                <button class="in-chat-search-close" id="close-in-chat-search"><i data-lucide="x" style="width:14px;height:14px;"></i></button>
+                            </div>
+                            
+                            <div class="messages-scroller" id="chat-messages"></div>
+                            
+                            <div class="chat-input-area">
+                                <div class="attack-toggle-bar">
+                                    <label class="attack-checkbox-label tamper-label">
+                                        <input type="checkbox" id="tamper-check"> Simulate Ciphertext Tampering
+                                    </label>
+                                    <label class="attack-checkbox-label replay-label">
+                                        <input type="checkbox" id="replay-check"> Simulate Replay Attack
+                                    </label>
+                                </div>
+                                <div class="input-box-wrapper">
+                                    <input class="message-input" type="text" id="message-input" placeholder="Type plaintext message...">
+                                    <button class="send-btn" id="send-btn"><i data-lucide="send" style="width:14px;height:14px;margin-right:6px;"></i> Encrypt & Send</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. SECURE MAIL -->
+            <div id="mail-section" class="content-section">
+                <div class="mail-client">
+
+                    <!-- LEFT: Folder sidebar -->
+                    <div class="mail-folders">
+                        <button class="mail-compose-fab" id="mail-compose-btn">
+                            <i data-lucide="pen-tool" class="fab-icon" style="width:16px;height:16px;"></i>
+                            <span class="fab-label">Compose</span>
+                        </button>
+
+                        <nav class="mail-folder-nav">
+                            <div class="mail-folder-item active" id="mail-tab-inbox" data-folder="inbox">
+                                <i data-lucide="inbox" style="width:16px;height:16px;margin-right:8px;"></i>
+                                <span class="folder-name">Inbox</span>
+                                <span class="folder-badge" id="inbox-count">0</span>
+                            </div>
+                            <div class="mail-folder-item" id="mail-tab-sent" data-folder="sent">
+                                <i data-lucide="send" style="width:16px;height:16px;margin-right:8px;"></i>
+                                <span class="folder-name">Sent</span>
+                                <span class="folder-badge" id="sent-count">0</span>
+                            </div>
+                        </nav>
+
+                        <div class="mail-security-badge">
+                            <div class="msb-icon"><i data-lucide="shield-check" style="width:20px;height:20px;color:var(--color-primary);"></i></div>
+                            <div class="msb-text">
+                                <div class="msb-title">End-to-End Encrypted</div>
+                                <div class="msb-sub">AES-256-GCM + ML-KEM-768</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CENTER: Mail list -->
+                    <div class="mail-list-panel">
+                        <div class="mail-list-header">
+                            <span class="ml-title" id="mail-folder-label">Inbox</span>
+                            <button class="ml-refresh-btn" id="mail-refresh-btn" title="Refresh"><i data-lucide="rotate-cw" style="width:14px;height:14px;"></i></button>
+                        </div>
+                        <div class="mail-list-body" id="mail-list"></div>
+                    </div>
+
+                    <!-- RIGHT: Reader / Compose -->
+                    <div class="mail-reader-panel">
+                        <!-- Empty state -->
+                        <div id="mail-empty-state" class="mail-empty-state">
+                            <div class="mes-icon"><i data-lucide="shield-check" style="width:48px;height:48px;color:var(--color-primary);margin-bottom:12px;"></i></div>
+                            <div class="mes-title">PQC Secure Mail</div>
+                            <div class="mes-desc">Select a message to read, or compose a new encrypted mail</div>
+                            <div class="mes-specs">
+                                <span>ML-KEM-768</span>
+                                <span>AES-256-GCM</span>
+                                <span>ML-DSA-65</span>
+                            </div>
+                        </div>
+
+                        <!-- Compose view -->
+                        <div id="mail-compose-view" class="mail-compose-view" style="display:none;">
+                            <div class="compose-header">
+                                <h2 class="compose-title"><i data-lucide="mail-plus" style="width:18px;height:18px;margin-right:8px;vertical-align:text-bottom;"></i> New Encrypted Mail</h2>
+                                <button class="compose-close-btn" id="mail-compose-close"><i data-lucide="x" style="width:16px;height:16px;"></i></button>
+                            </div>
+                            <form id="mail-compose-form" class="compose-form">
+                                <div class="compose-field">
+                                    <label class="compose-label">To</label>
+                                    <input class="compose-input" type="text" id="mail-recipient" required placeholder="bob@pqc.local">
+                                </div>
+                                <div class="compose-field">
+                                    <label class="compose-label">Subject</label>
+                                    <input class="compose-input" type="text" id="mail-subject" required placeholder="Enter subject…">
+                                </div>
+                                <div class="compose-field">
+                                    <label class="compose-label">Security Mode</label>
+                                    <select class="compose-input" id="mail-mode">
+                                        <option value="Hybrid">Hybrid (X25519 + ML-KEM)</option>
+                                        <option value="PQC">Post-Quantum (ML-KEM)</option>
+                                        <option value="Modern Classical">Modern Classical (X25519)</option>
+                                        <option value="Classical">Classical Baseline (RSA-2048)</option>
+                                    </select>
+                                </div>
+                                <div class="compose-field" id="mail-nist-level-field">
+                                    <label class="compose-label">NIST Security Level</label>
+                                    <select class="compose-input" id="mail-nist-level">
+                                        <option value="3" selected>Level 3: Balanced Standard (ML-KEM-768)</option>
+                                        <option value="1">Level 1: IoT / High-Speed (ML-KEM-512)</option>
+                                        <option value="5">Level 5: Maximum Military Grade (ML-KEM-1024)</option>
+                                    </select>
+                                </div>
+                                <div class="compose-body-wrap">
+                                    <textarea class="compose-body" id="mail-body" required placeholder="Write your confidential message here…"></textarea>
+                                </div>
+                                <div class="compose-actions">
+                                    <div class="compose-encrypt-note"><i data-lucide="lock" style="width:14px;height:14px;margin-right:6px;vertical-align:text-bottom;"></i> Message will be encrypted before sending</div>
+                                    <button class="compose-send-btn" type="submit">Encrypt &amp; Send <i data-lucide="send" style="width:14px;height:14px;margin-left:6px;"></i></button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Reader view -->
+                        <div id="mail-read-view" class="mail-read-view" style="display:none;">
+                            <div class="reader-toolbar">
+                                <button class="reader-back-btn" id="mail-back-btn"><i data-lucide="arrow-left" style="width:14px;height:14px;margin-right:6px;"></i> Back</button>
+                            </div>
+                            <div id="mail-reader-content" class="mail-reader-card"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 4. ENCRYPTED FILES -->
+            <div id="files-section" class="content-section">
+                <div class="section-header">
+                    <h1 class="section-title">Encrypted File Sharing</h1>
+                    <p class="section-desc">AES-256-GCM per-file key encryption with 512-bit SHA3/SHAKE quantum-proof integrity verification</p>
+                </div>
+                
+                <div class="card-panel">
+                    <h2>Upload File for Encryption</h2>
+                    <p class="section-desc">Supported formats: PDF, DOCX, XLSX, PPTX, TXT, images, ZIP (Max 25MB)</p>
+                    <form id="file-upload-form" class="file-upload-box" style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
+                        <input type="file" id="file-input" required style="flex:1; min-width:220px;">
+                        <select id="file-hash-algo" class="crypto-select" title="Integrity Hash Mode" style="padding:10px 14px; font-size:0.85rem;">
+                            <option value="sha3_512" selected>SHA3-512 (512-bit Quantum-Proof)</option>
+                            <option value="shake_256">SHAKE-256 (512-bit XOF)</option>
+                            <option value="sha3_256">SHA3-256 (Standard)</option>
+                        </select>
+                        <button class="action-btn pqc" type="submit"><i data-lucide="upload-cloud" style="width:16px;height:16px;margin-right:6px;"></i> Upload & Encrypt File</button>
+                    </form>
+                </div>
+                
+                <div class="card-panel" style="margin-top:20px;">
+                    <h2>Stored Encrypted Files</h2>
+                    <div class="crypto-table-wrapper">
+                        <table class="crypto-table">
+                            <thead>
+                                <tr>
+                                    <th>Filename</th>
+                                    <th>Size</th>
+                                    <th>MIME Type</th>
+                                    <th>Quantum Integrity Digest</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="files-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 6. ATTACK LAB -->
+            <div id="attack-section" class="content-section">
+                <div class="section-header">
+                    <h1 class="section-title">Controlled Attack Laboratory & Cryptanalysis Suite</h1>
+                    <p class="section-desc">Interactive Quantum Cryptanalysis & Real Attack Attack Vectors (Tampering, Replay, Wrong-Key, MITM)</p>
+                </div>
+                
+                <!-- GROVER'S QUANTUM EFFORT ESTIMATOR & SHOR CRYPTANALYSIS PANEL -->
+                <div class="card-panel" style="margin-bottom: 24px; border-left: 4px solid var(--accent-cyan);">
+                    <div class="card-title" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                        <span><i data-lucide="cpu" style="width:18px;height:18px;margin-right:6px;vertical-align:text-bottom;color:var(--accent-cyan);"></i> Grover's Quantum Effort Estimator & Shor Cryptanalysis</span>
+                        <span class="badge safe" id="quantum-effort-verdict-badge" style="font-size:0.8rem; padding:4px 10px;">NIST LEVEL 3 GOLDILOCKS STANDARD</span>
+                    </div>
+                    <p class="section-desc" style="margin-bottom:16px;">
+                        Real-time mathematical cryptanalysis: Compare classical brute-force operations ($2^k$) vs Grover's quadratic quantum speedup ($2^{k/2}$) and Shor's polynomial factorization across cryptographic primitives.
+                    </p>
+
+                    <div class="quantum-effort-controls" style="display:flex; flex-wrap:wrap; gap:14px; align-items:center; margin-bottom:18px;">
+                        <label style="font-weight:600; font-size:0.9rem; color:var(--text-primary);">Select Target Cipher:</label>
+                        <select class="crypto-select" id="quantum-estimator-alg" style="min-width:260px;" onchange="updateQuantumEffortEstimator()">
+                            <option value="ML-KEM-768" selected>ML-KEM-768 (NIST Level 3 - QUANT Default)</option>
+                            <option value="ML-KEM-512">ML-KEM-512 (NIST Level 1 - IoT Fast)</option>
+                            <option value="ML-KEM-1024">ML-KEM-1024 (NIST Level 5 - Military Grade)</option>
+                            <option value="AES-256">AES-256-GCM (QUANT Primary AEAD)</option>
+                            <option value="AES-128">AES-128-GCM (Standard AEAD)</option>
+                            <option value="Ascon-128a">Ascon-128a (NIST Lightweight AEAD)</option>
+                            <option value="SHA3-512">SHA3-512 (512-bit Quantum-Proof Integrity)</option>
+                            <option value="SHA3-256">SHA3-256 (Standard Integrity)</option>
+                            <option value="RSA-2048">RSA-2048 (Classical Baseline - Vulnerable)</option>
+                            <option value="RSA-4096">RSA-4096 (Classical Extended - Vulnerable)</option>
+                            <option value="X25519">X25519 (ECDH - Vulnerable to Shor)</option>
+                        </select>
+                        <button class="action-btn sm pqc" type="button" onclick="updateQuantumEffortEstimator()"><i data-lucide="calculator" style="width:14px;height:14px;margin-right:4px;"></i> Refresh Calculation</button>
+                    </div>
+
+                    <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); margin-bottom:16px;">
+                        <div class="stat-card" style="border-left: 3px solid var(--accent-cyan);">
+                            <span class="stat-label">Classical Security</span>
+                            <span class="stat-val" id="qe-classical-bits" style="font-size:1.3rem;">192-bit</span>
+                            <span class="stat-desc" id="qe-classical-ops">2²⁰⁷ lattice operations</span>
+                        </div>
+                        <div class="stat-card" style="border-left: 3px solid #a855f7;">
+                            <span class="stat-label">Quantum Security</span>
+                            <span class="stat-val" id="qe-quantum-bits" style="font-size:1.3rem; color:#a855f7;">192-bit</span>
+                            <span class="stat-desc" id="qe-quantum-ops">> 1.53 × 10⁵⁴ quantum gates</span>
+                        </div>
+                        <div class="stat-card" style="border-left: 3px solid #eab308;">
+                            <span class="stat-label">Quantum Attack Vector</span>
+                            <span class="stat-val" id="qe-attack-type" style="font-size:1.05rem; color:#eab308;">Lattice Hardness</span>
+                            <span class="stat-desc" id="qe-attack-desc">Immune to Shor Factorization</span>
+                        </div>
+                        <div class="stat-card" style="border-left: 3px solid #10b981;">
+                            <span class="stat-label">Est. Time to Crack</span>
+                            <span class="stat-val" id="qe-crack-time" style="font-size:1.05rem; color:#10b981;">> 10³⁰ Years</span>
+                            <span class="stat-desc" id="qe-qubits-needed">Immune to Shor</span>
+                        </div>
+                    </div>
+
+                    <div style="background:var(--bg-secondary); border-radius:8px; padding:14px 18px; font-size:0.88rem; line-height:1.6; border:1px solid var(--border-color);">
+                        <strong style="color:var(--text-primary);"><i data-lucide="shield-check" style="width:15px;height:15px;margin-right:4px;vertical-align:text-bottom;color:var(--accent-cyan);"></i> Cryptanalytic Evaluation:</strong>
+                        <span id="qe-verdict-text" style="color:var(--text-secondary); margin-left:6px;">Official NIST primary recommendation for general web, enterprise, and cloud.</span>
+                    </div>
+                </div>
+
+                <div class="attack-lab-grid">
+                    <div class="attack-card">
+                        <h3>1. Unencrypted Baseline Exposure</h3>
+                        <div class="attack-card-actions">
+                            <button class="action-btn warn" onclick="runAttack('unencrypted_baseline')">Run Baseline Test</button>
+                            <button class="action-btn sm code-btn" onclick="viewAttackCode('unencrypted_baseline')"><i data-lucide="file-code-2" style="width:13px;height:13px;margin-right:4px;"></i> View Python Code</button>
+                        </div>
+                    </div>
+                    <div class="attack-card">
+                        <h3>2. Unauthorized Wrong-Key Attack</h3>
+                        <div class="attack-card-actions">
+                            <button class="action-btn" onclick="runAttack('wrong_key')">Run Wrong Key Attack</button>
+                            <button class="action-btn sm code-btn" onclick="viewAttackCode('wrong_key')"><i data-lucide="file-code-2" style="width:13px;height:13px;margin-right:4px;"></i> View Python Code</button>
+                        </div>
+                    </div>
+                    <div class="attack-card">
+                        <h3>3. Ciphertext Bit-Tampering Attack</h3>
+                        <div class="attack-card-actions">
+                            <button class="action-btn" onclick="runAttack('tamper')">Run Tampering Test</button>
+                            <button class="action-btn sm code-btn" onclick="viewAttackCode('tamper')"><i data-lucide="file-code-2" style="width:13px;height:13px;margin-right:4px;"></i> View Python Code</button>
+                        </div>
+                    </div>
+                    <div class="attack-card">
+                        <h3>4. ML-DSA-65 Signature Failure</h3>
+                        <div class="attack-card-actions">
+                            <button class="action-btn pqc" onclick="runAttack('signature')">Verify Signature Test</button>
+                            <button class="action-btn sm code-btn" onclick="viewAttackCode('signature')"><i data-lucide="file-code-2" style="width:13px;height:13px;margin-right:4px;"></i> View Python Code</button>
+                        </div>
+                    </div>
+                    <div class="attack-card">
+                        <h3>5. Application Replay Attack</h3>
+                        <div class="attack-card-actions">
+                            <button class="action-btn" onclick="runAttack('replay')">Run Replay Attack</button>
+                            <button class="action-btn sm code-btn" onclick="viewAttackCode('replay')"><i data-lucide="file-code-2" style="width:13px;height:13px;margin-right:4px;"></i> View Python Code</button>
+                        </div>
+                    </div>
+                    <div class="attack-card">
+                        <h3>6. Controlled MITM Handshake Test</h3>
+                        <div class="attack-card-actions">
+                            <button class="action-btn pqc" onclick="runAttack('mitm')">Run Controlled MITM</button>
+                            <button class="action-btn sm code-btn" onclick="viewAttackCode('mitm')"><i data-lucide="file-code-2" style="width:13px;height:13px;margin-right:4px;"></i> View Python Code</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-panel" style="margin-top:20px;">
+                    <div class="card-title" style="display:flex; justify-content:space-between; align-items:center;">
+                        <span><i data-lucide="terminal" style="width:16px;height:16px;margin-right:6px;vertical-align:text-bottom;color:var(--color-warn);"></i> Real Attack Test Terminal Output</span>
+                        <span id="attack-status-badge" style="font-size:0.75rem; font-family:var(--font-mono); color:var(--text-muted);">READY</span>
+                    </div>
+                    <div id="attack-output-console" class="terminal-box" style="height:260px; font-family:var(--font-mono); font-size:0.83rem;">
+                        <div class="log-entry">> Attack Laboratory Console initialized. Select an attack above to execute real-time test.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attack Code Viewer Modal -->
+            <div id="attack-code-modal" class="modal-overlay" style="display:none;">
+                <div class="modal-card">
+                    <div class="modal-header">
+                        <h3 id="attack-modal-title"><i data-lucide="file-code-2" style="width:18px;height:18px;margin-right:6px;vertical-align:text-bottom;"></i> Python Backend Attack Implementation Code</h3>
+                        <button class="modal-close-btn" onclick="closeAttackCodeModal()"><i data-lucide="x" style="width:16px;height:16px;"></i></button>
+                    </div>
+                    <div class="modal-body">
+                        <pre><code id="attack-modal-code" class="python-code-block"></code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Create Group Chat Modal -->
+            <div id="create-group-modal" class="modal-overlay" style="display:none;">
+                <div class="modal-card" style="max-width: 480px;">
+                    <div class="modal-header">
+                        <h3 id="group-modal-title"><i data-lucide="users" style="width:18px;height:18px;margin-right:6px;vertical-align:text-bottom;"></i> Create Secure Group Chat</h3>
+                        <button class="modal-close-btn" id="close-group-modal-btn"><i data-lucide="x" style="width:16px;height:16px;"></i></button>
+                    </div>
+                    <div class="modal-body" style="padding: 20px;">
+                        <form id="create-group-form">
+                            <div class="form-group" style="margin-bottom: 16px;">
+                                <label class="form-label" for="group-name-input">Group Name</label>
+                                <input class="form-input" type="text" id="group-name-input" required placeholder="e.g. Quantum Research Team">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 16px;">
+                                <label class="form-label">Select Group Members</label>
+                                <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:8px;">Choose registered users to include in this group:</p>
+                                <div id="group-members-list" class="user-select-list">
+                                    <!-- User checkboxes populated dynamically -->
+                                </div>
+                            </div>
+                            <div id="create-group-error" style="color:var(--color-danger); font-size:0.85rem; margin-bottom:12px; min-height:18px;"></div>
+                            <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+                                <button type="button" class="action-btn sm" id="cancel-group-modal-btn">Cancel</button>
+                                <button type="submit" class="action-btn pqc" id="submit-create-group-btn"><i data-lucide="lock" style="width:14px;height:14px;margin-right:4px;"></i> Create Group</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Info & Cryptographic Profile Modal -->
+            <div id="chat-info-modal" class="modal-overlay" style="display:none;">
+                <div class="modal-card" style="max-width: 540px;">
+                    <div class="modal-header">
+                        <h3 id="chat-info-title"><i data-lucide="info" style="width:18px;height:18px;margin-right:6px;vertical-align:text-bottom;"></i> Contact Profile & Security Keys</h3>
+                        <button class="modal-close-btn" id="close-chat-info-btn"><i data-lucide="x" style="width:16px;height:16px;"></i></button>
+                    </div>
+                    <div class="modal-body" id="chat-info-body" style="padding: 20px;">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Lock / Passcode Modal -->
+            <div id="chat-lock-modal" class="modal-overlay" style="display:none;">
+                <div class="modal-card" style="max-width: 420px; text-align: center;">
+                    <div class="modal-header">
+                        <h3 id="chat-lock-title"><i data-lucide="lock" style="width:18px;height:18px;margin-right:6px;vertical-align:text-bottom;"></i> Chat Passcode Lock</h3>
+                        <button class="modal-close-btn" id="close-chat-lock-btn"><i data-lucide="x" style="width:16px;height:16px;"></i></button>
+                    </div>
+                    <div class="modal-body" style="padding: 24px;">
+                        <div style="font-size: 2.6rem; margin-bottom: 8px; color: var(--color-primary);"><i data-lucide="shield-alert" style="width:48px;height:48px;"></i></div>
+                        <h4 id="chat-lock-target-name" style="margin-bottom: 8px; font-size: 1.1rem; color: var(--color-primary);">Protected Chat</h4>
+                        <p id="chat-lock-desc" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 18px;">
+                            Enter the 4-digit PIN passcode to unlock this conversation.
+                        </p>
+                        <form id="chat-lock-form">
+                            <div class="form-group" style="margin-bottom: 16px;">
+                                <input class="form-input" type="password" id="chat-lock-pin-input" maxlength="8" required placeholder="••••" style="text-align: center; font-size: 1.4rem; letter-spacing: 6px;">
+                            </div>
+                            <div id="chat-lock-error" style="color: var(--color-danger); font-size: 0.85rem; margin-bottom: 14px; min-height: 18px;"></div>
+                            <div style="display: flex; justify-content: center; gap: 12px;">
+                                <button type="button" class="action-btn sm" id="cancel-chat-lock-btn">Cancel</button>
+                                <button type="submit" class="action-btn pqc" id="submit-chat-lock-btn"><i data-lucide="unlock" style="width:14px;height:14px;margin-right:4px;"></i> Unlock Chat</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deep Packet Cryptographic Inspection Modal -->
+            <div id="packet-detail-modal" class="modal-overlay" style="display:none;">
+                <div class="modal-card" style="max-width: 720px; max-height: 88vh; display: flex; flex-direction: column;">
+                    <div class="modal-header">
+                        <h3 id="packet-detail-title" style="display:flex; align-items:center; gap:8px;">
+                            <i data-lucide="binary" style="width:18px;height:18px;color:var(--accent-cyan);"></i>
+                            Cryptographic Packet Telemetry & Algorithm Inspector
+                        </h3>
+                        <button class="modal-close-btn" id="close-packet-modal-btn"><i data-lucide="x" style="width:16px;height:16px;"></i></button>
+                    </div>
+                    <div class="modal-body" id="packet-detail-body" style="padding: 20px; overflow-y: auto; flex: 1;">
+                        <!-- Content dynamically inserted -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- WhatsApp Style Profile Modal / Drawer -->
+            <div id="profile-drawer-modal" class="modal-overlay whatsapp-profile-overlay" style="display:none;">
+                <div class="whatsapp-profile-card">
+                    <!-- WhatsApp-style Header with Back arrow -->
+                    <div class="whatsapp-profile-header">
+                        <button class="whatsapp-back-btn" id="close-profile-drawer-btn" title="Back">
+                            <i data-lucide="arrow-left"></i>
+                        </button>
+                        <h2>Profile</h2>
+                    </div>
+
+                    <div class="whatsapp-profile-scroll-body">
+                        <!-- 1. WhatsApp Avatar Section with Camera Icon -->
+                        <div class="whatsapp-avatar-wrap">
+                            <div class="whatsapp-avatar-large" id="profile-avatar-large" title="Change Profile Theme">
+                                <span id="profile-avatar-letter">N</span>
+                                <div class="whatsapp-avatar-hover-overlay" id="change-avatar-btn">
+                                    <i data-lucide="camera" style="width:28px;height:28px;"></i>
+                                    <span>CHANGE<br>THEME</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Avatar Color Theme Picker -->
+                            <div class="avatar-theme-picker" id="avatar-theme-picker" style="display:none;">
+                                <div class="picker-title">Select Avatar Gradient Theme:</div>
+                                <div class="color-palette">
+                                    <span class="color-dot active" data-gradient="emerald" style="background: linear-gradient(135deg, #00e676, #00b0ff);" title="Quantum Emerald"></span>
+                                    <span class="color-dot" data-gradient="cyan" style="background: linear-gradient(135deg, #00f0ff, #7000ff);" title="Cyber Cyan"></span>
+                                    <span class="color-dot" data-gradient="violet" style="background: linear-gradient(135deg, #a855f7, #ec4899);" title="Neon Violet"></span>
+                                    <span class="color-dot" data-gradient="amber" style="background: linear-gradient(135deg, #f59e0b, #ef4444);" title="Solar Amber"></span>
+                                    <span class="color-dot" data-gradient="matrix" style="background: linear-gradient(135deg, #10b981, #064e3b);" title="Matrix Green"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2. Your Name Section (WhatsApp style with inline pen edit) -->
+                        <div class="whatsapp-profile-section">
+                            <div class="whatsapp-section-label">Your name</div>
+                            <div class="whatsapp-row-display" id="profile-name-display-row">
+                                <span class="whatsapp-display-value" id="profile-display-name-val">User</span>
+                                <button class="whatsapp-edit-pen-btn" id="edit-name-pen-btn" title="Edit name">
+                                    <i data-lucide="pencil"></i>
+                                </button>
+                            </div>
+                            <div class="whatsapp-row-edit" id="profile-name-edit-row" style="display:none;">
+                                <input type="text" class="whatsapp-inline-input" id="profile-name-input" maxlength="25" placeholder="Enter your name">
+                                <span class="whatsapp-char-counter" id="name-char-count">25</span>
+                                <button class="whatsapp-save-btn" id="save-name-btn" title="Save"><i data-lucide="check"></i></button>
+                                <button class="whatsapp-cancel-btn" id="cancel-name-btn" title="Cancel"><i data-lucide="x"></i></button>
+                            </div>
+                            <p class="whatsapp-section-helper">
+                                This is not your username or pin. This name will be visible to your PQC contacts and group chats.
+                            </p>
+                        </div>
+
+                        <!-- 3. About / Status Section (WhatsApp style with quick status pills) -->
+                        <div class="whatsapp-profile-section">
+                            <div class="whatsapp-section-label">About</div>
+                            <div class="whatsapp-row-display" id="profile-about-display-row">
+                                <span class="whatsapp-display-value" id="profile-display-about-val">🔐 Quantum Secured | ML-KEM-768 Active</span>
+                                <button class="whatsapp-edit-pen-btn" id="edit-about-pen-btn" title="Edit About">
+                                    <i data-lucide="pencil"></i>
+                                </button>
+                            </div>
+                            <div class="whatsapp-row-edit" id="profile-about-edit-row" style="display:none;">
+                                <input type="text" class="whatsapp-inline-input" id="profile-about-input" maxlength="80" placeholder="Set your status">
+                                <button class="whatsapp-save-btn" id="save-about-btn" title="Save"><i data-lucide="check"></i></button>
+                                <button class="whatsapp-cancel-btn" id="cancel-about-btn" title="Cancel"><i data-lucide="x"></i></button>
+                            </div>
+                            
+                            <!-- WhatsApp Quick Status Presets -->
+                            <div class="whatsapp-status-presets">
+                                <div class="preset-label">Quick Presets:</div>
+                                <div class="preset-chips">
+                                    <button type="button" class="status-chip" data-status="🟢 Available">🟢 Available</button>
+                                    <button type="button" class="status-chip" data-status="🛡️ Quantum Secured">🛡️ Quantum Secured</button>
+                                    <button type="button" class="status-chip" data-status="⚡ Encrypting Traffic">⚡ Encrypting Traffic</button>
+                                    <button type="button" class="status-chip" data-status="💻 In the Attack Lab">💻 In the Attack Lab</button>
+                                    <button type="button" class="status-chip" data-status="🔕 Do Not Disturb">🔕 Do Not Disturb</button>
+                                    <button type="button" class="status-chip" data-status="🚀 PQC Stack v2.5">🚀 PQC Stack v2.5</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. Contact & Security Node Section -->
+                        <div class="whatsapp-profile-section">
+                            <div class="whatsapp-section-label">Contact & Security Node</div>
+                            <div class="whatsapp-info-item">
+                                <div class="info-icon"><i data-lucide="mail"></i></div>
+                                <div class="info-content">
+                                    <span class="info-title">PQC Secure Email</span>
+                                    <span class="info-value" id="profile-display-email">user@pqc.local</span>
+                                </div>
+                            </div>
+                            <div class="whatsapp-info-item">
+                                <div class="info-icon"><i data-lucide="phone"></i></div>
+                                <div class="info-content" style="flex:1;">
+                                    <span class="info-title">PQC Secure Phone / Node ID</span>
+                                    <div class="whatsapp-row-display" id="profile-phone-display-row">
+                                        <span class="info-value" id="profile-display-phone">+91 98401 • PQC-NODE-781</span>
+                                        <button class="whatsapp-edit-pen-btn sm" id="edit-phone-pen-btn" title="Edit phone"><i data-lucide="pencil" style="width:12px;height:12px;"></i></button>
+                                    </div>
+                                    <div class="whatsapp-row-edit" id="profile-phone-edit-row" style="display:none; margin-top:4px;">
+                                        <input type="text" class="whatsapp-inline-input" id="profile-phone-input" placeholder="+91 98401 23456">
+                                        <button class="whatsapp-save-btn" id="save-phone-btn"><i data-lucide="check"></i></button>
+                                        <button class="whatsapp-cancel-btn" id="cancel-phone-btn"><i data-lucide="x"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 5. WhatsApp Scannable QR Code & Cryptographic Fingerprint -->
+                        <div class="whatsapp-profile-section qr-section">
+                            <div class="whatsapp-section-label" style="display:flex; justify-content:space-between; align-items:center;">
+                                <span>Cryptographic QR Code & Keys</span>
+                                <button class="action-btn sm" id="toggle-qr-view-btn" style="font-size:0.75rem; padding:4px 10px;">
+                                    <i data-lucide="qr-code" style="width:13px;height:13px;margin-right:4px;"></i> <span id="qr-btn-text">View QR</span>
+                                </button>
+                            </div>
+                            
+                            <div class="whatsapp-qr-card" id="whatsapp-qr-container" style="display:none;">
+                                <div class="qr-canvas-box">
+                                    <svg id="profile-qr-svg" width="160" height="160" viewBox="0 0 160 160"></svg>
+                                </div>
+                                <div class="qr-tagline">
+                                    <i data-lucide="shield-check" style="color:var(--color-primary); width:14px; height:14px; margin-right:4px;"></i>
+                                    NIST FIPS 203 & 204 Verified Identity
+                                </div>
+                                <p class="qr-instruction">Your contacts can scan this QR code to verify your ML-KEM and ML-DSA keys.</p>
+                            </div>
+
+                            <div class="key-fingerprint-box">
+                                <div class="fp-header">
+                                    <span><i data-lucide="fingerprint" style="width:13px;height:13px;margin-right:4px;vertical-align:text-bottom;"></i> ML-DSA-65 Identity Fingerprint</span>
+                                    <button class="action-btn sm" id="copy-fp-btn" title="Copy Fingerprint"><i data-lucide="copy" style="width:12px;height:12px;"></i></button>
+                                </div>
+                                <div class="fp-code" id="profile-key-fingerprint">7F:A3:9B:4C:E1:82:3D:20:91:0F:7C:E6:55:1A:BC:D2</div>
+                            </div>
+                        </div>
+
+                        <!-- 6. Privacy, Security & Sessions (WhatsApp style) -->
+                        <div class="whatsapp-profile-section">
+                            <div class="whatsapp-section-label">Privacy & Session Features</div>
+                            <div class="whatsapp-setting-row">
+                                <div class="setting-desc">
+                                    <strong>End-to-End Quantum Encryption</strong>
+                                    <span>Secured with ML-KEM-768 & AES-256-GCM.</span>
+                                </div>
+                                <span class="badge safe" style="font-size:0.75rem;">ACTIVE</span>
+                            </div>
+                            <div class="whatsapp-setting-row">
+                                <div class="setting-desc">
+                                    <strong>Disappearing Messages</strong>
+                                    <span>Default timer for new secure chats</span>
+                                </div>
+                                <select class="whatsapp-select" id="disappearing-messages-select">
+                                    <option value="off" selected>Off</option>
+                                    <option value="24h">24 hours</option>
+                                    <option value="7d">7 days</option>
+                                    <option value="90d">90 days</option>
+                                </select>
+                            </div>
+                            <div class="whatsapp-setting-row">
+                                <div class="setting-desc">
+                                    <strong>Read Receipts</strong>
+                                    <span>Show double check status ticks</span>
+                                </div>
+                                <label class="whatsapp-toggle-switch">
+                                    <input type="checkbox" id="read-receipts-toggle" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="whatsapp-setting-row">
+                                <div class="setting-desc">
+                                    <strong>Active Session Device</strong>
+                                    <span id="session-device-text">Windows 11 • Desktop Browser • Active Now</span>
+                                </div>
+                                <span class="crypto-chip" style="font-size:0.72rem;">ONLINE</span>
+                            </div>
+                        </div>
+
+                        <!-- 7. Logout Action -->
+                        <div class="whatsapp-profile-section" style="border-bottom:none; margin-bottom:20px;">
+                            <button class="whatsapp-logout-action-btn" id="drawer-logout-btn">
+                                <i data-lucide="log-out"></i> Log Out of Account
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Primitive Live Test Result Modal -->
+            <div id="primitive-test-modal" class="modal-overlay" style="display:none;">
+                <div class="modal-card" style="max-width: 580px;">
+                    <div class="modal-header">
+                        <h3 id="primitive-modal-title"><i data-lucide="cpu" style="width:18px;height:18px;margin-right:6px;vertical-align:text-bottom;color:var(--accent-cyan);"></i> Live Primitive Execution Test</h3>
+                        <button class="modal-close-btn" id="close-primitive-modal-btn"><i data-lucide="x" style="width:16px;height:16px;"></i></button>
+                    </div>
+                    <div class="modal-body" id="primitive-modal-body" style="padding: 20px;">
+                        <!-- Content inserted dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. CRYPTO LAB -->
+            <div id="crypto-lab-section" class="content-section">
+                <div class="section-header">
+                    <h1 class="section-title">Cryptographic Laboratory</h1>
+                    <p class="section-desc">Status, real-time specifications, and interactive live execution of all 10 cryptographic primitives</p>
+                </div>
+                
+                <div class="crypto-table-wrapper">
+                    <table class="crypto-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Primitive Name</th>
+                                <th>Role</th>
+                                <th>Category</th>
+                                <th>Runtime Status</th>
+                                <th>Key / Ciphertext Profile</th>
+                                <th style="text-align:center;">Live Test</th>
+                            </tr>
+                        </thead>
+                        <tbody id="primitives-table-body"></tbody>
+                    </table>
+                </div>
+
+                <!-- Interactive Cryptographic Sandbox & Primitive Evaluator -->
+                <div class="card-panel" style="margin-top:24px; border-left: 4px solid var(--color-primary);">
+                    <div class="card-title" style="display:flex; justify-content:space-between; align-items:center;">
+                        <span><i data-lucide="flask-conical" style="width:18px;height:18px;margin-right:6px;vertical-align:text-bottom;color:var(--color-primary);"></i> Interactive Cryptographic Sandbox</span>
+                        <span class="crypto-chip">LIVE HARDWARE EXECUTION</span>
+                    </div>
+                    <p class="section-desc" style="margin-bottom:16px;">
+                        Type custom text below to execute real-time Post-Quantum key encapsulation, digital signing, or AEAD authenticated encryption on the host CPU.
+                    </p>
+
+                    <div style="display:grid; grid-template-columns: 1fr auto; gap:12px; margin-bottom:14px;">
+                        <input type="text" id="crypto-sandbox-input" class="form-input" placeholder="Type test plaintext or secret message to encrypt / sign..." value="Classified Post-Quantum Transmission Payload 2026">
+                        <select id="crypto-sandbox-alg" class="form-input" style="min-width:180px; width:auto;">
+                            <option value="ML-KEM-768" selected>ML-KEM-768 (KEM)</option>
+                            <option value="ML-DSA-65">ML-DSA-65 (Sig)</option>
+                            <option value="SLH-DSA">SLH-DSA (Sig)</option>
+                            <option value="AES-256-GCM">AES-256-GCM (AEAD)</option>
+                            <option value="ChaCha20-Poly1305">ChaCha20-Poly1305 (AEAD)</option>
+                            <option value="Ascon-128a">Ascon-128a (Lightweight)</option>
+                            <option value="X25519">X25519 (ECDH)</option>
+                            <option value="SHA3-512">SHA3-512 (Hash)</option>
+                            <option value="SHAKE-256">SHAKE-256 (XOF)</option>
+                            <option value="RSA-2048">RSA-2048 (Classical)</option>
+                        </select>
+                    </div>
+
+                    <button class="action-btn pqc" id="run-sandbox-btn" style="margin-bottom:16px;">
+                        <i data-lucide="play" style="width:15px;height:15px;margin-right:6px;"></i> Execute Primitive Live
+                    </button>
+
+                    <div id="crypto-sandbox-output" class="terminal-box" style="display:none; height:150px; font-family:var(--font-mono); font-size:0.83rem;">
+                        <!-- Sandbox execution output -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. BENCHMARKS -->
+            <div id="benchmark-section" class="content-section">
+                <div class="section-header">
+                    <h1 class="section-title">Performance Benchmark Laboratory</h1>
+                    <p class="section-desc">Dynamic runtime measurements executed directly on this host machine</p>
+                </div>
+                
+                <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+                    <button class="action-btn pqc" id="run-benchmarks-btn"><i data-lucide="zap" style="width:16px;height:16px;margin-right:6px;"></i> Run Full Benchmark Suite</button>
+                    <span id="benchmark-status-badge" style="font-size:0.82rem; font-family:var(--font-mono); color:var(--text-muted);">Ready to benchmark</span>
+                </div>
+
+                <!-- Benchmark Progress Indicator -->
+                <div id="benchmark-progress-box" class="card-panel" style="display:none; margin-top:16px; border-left:4px solid var(--accent-cyan); padding:14px 18px;">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+                        <span style="font-size:0.9rem; font-weight:600; color:var(--accent-cyan); display:flex; align-items:center; gap:8px;">
+                            <span class="status-pulse-ring" style="width:8px;height:8px;display:inline-block;"></span>
+                            <span id="benchmark-progress-text">Executing host machine benchmarks...</span>
+                        </span>
+                        <span id="benchmark-progress-percent" style="font-family:var(--font-mono); font-size:0.85rem; color:var(--text-muted);">Running...</span>
+                    </div>
+                    <div style="width:100%; height:6px; background:rgba(255,255,255,0.08); border-radius:3px; overflow:hidden;">
+                        <div id="benchmark-progress-bar" style="width:45%; height:100%; background:linear-gradient(90deg, var(--color-primary), var(--accent-cyan)); transition: width 0.3s ease;"></div>
+                    </div>
+                </div>
+                
+                <div class="benchmark-layout" style="margin-top:20px;">
+                    <div class="chart-panel">
+                        <canvas id="benchmarkChart"></canvas>
+                    </div>
+                    <div class="benchmark-data-panel">
+                        <div class="crypto-table-wrapper">
+                            <table class="crypto-table">
+                                <thead>
+                                    <tr>
+                                        <th>Scheme</th>
+                                        <th>Operation</th>
+                                        <th>Avg Time (ms)</th>
+                                        <th>Payload Size</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="benchmark-table-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. AUDIT LOGS -->
+            <div id="audit-section" class="content-section">
+                <div class="section-header">
+                    <h1 class="section-title">Security Audit Log</h1>
+                    <p class="section-desc">Immutable audit record of logins, handshakes, encryptions, and blocked attack attempts</p>
+                </div>
+                
+                <div class="crypto-table-wrapper">
+                    <table class="crypto-table">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>User</th>
+                                <th>Action</th>
+                                <th>Algorithm / Mode</th>
+                                <th>Result</th>
+                                <th>Risk Level</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody id="audit-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 10. KEY MANAGEMENT -->
+            <div id="keys-section" class="content-section">
+                <div class="section-header">
+                    <h1 class="section-title">Key Management Directory</h1>
+                    <p class="section-desc">Manage public key infrastructure, key metadata, rotation, and session revocation</p>
+                </div>
+                
+                <button class="action-btn warn" id="rotate-keys-btn"><i data-lucide="refresh-cw" style="width:16px;height:16px;margin-right:6px;"></i> Rotate My Identity Key Suite</button>
+                
+                <div class="card-panel" style="margin-top:20px;">
+                    <h2>Public Key Directory</h2>
+                    <div class="crypto-table-wrapper">
+                        <table class="crypto-table">
+                            <thead>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>PQC Email</th>
+                                    <th>RSA-2048 Public Key</th>
+                                    <th>ML-DSA-65 Public Key</th>
+                                    <th>X25519 Public Key</th>
+                                </tr>
+                            </thead>
+                            <tbody id="keys-directory-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/quantum_flow.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script>
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const sidebar = document.querySelector('.sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+
+        if (hamburgerBtn) hamburgerBtn.addEventListener('click', () => { sidebar.classList.add('open'); overlay.classList.add('open'); });
+        if (overlay) overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.classList.remove('open'); });
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', () => { if (window.innerWidth <= 768) { sidebar.classList.remove('open'); overlay.classList.remove('open'); } });
+        });
+        function switchTab(sectionId) {
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            const targetNav = document.querySelector(`.nav-item[data-target="${sectionId}"]`);
+            if (targetNav) targetNav.classList.add('active');
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) targetSection.classList.add('active');
+        }
+
+        // ── Theme Toggle ──────────────────────────────────────────────────────
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            if (document.body) document.body.setAttribute('data-theme', theme);
+            localStorage.setItem('pqc-theme', theme);
+            const iconName = theme === 'dark' ? 'moon' : 'sun';
+            document.querySelectorAll('#desktop-theme-toggle, #mobile-theme-toggle')
+                    .forEach(btn => {
+                        btn.innerHTML = `<i data-lucide="${iconName}"></i>`;
+                    });
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function toggleTheme(e) {
+            if (e && e.preventDefault) e.preventDefault();
+            const current = document.documentElement.getAttribute('data-theme') || 'dark';
+            const next = current === 'dark' ? 'light' : 'dark';
+            applyTheme(next);
+        }
+
+        // Apply saved theme immediately on page load
+        applyTheme(localStorage.getItem('pqc-theme') || 'dark');
+
+        // Single delegated click handler as fallback
+        document.addEventListener('click', function(e) {
+            const btn = e.target.closest('#desktop-theme-toggle, #mobile-theme-toggle');
+            if (btn) {
+                toggleTheme(e);
+            }
+        });
+
+        // Initialize Lucide icons on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

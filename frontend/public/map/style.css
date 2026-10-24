@@ -1,0 +1,1158 @@
+/* ==========================================================================
+   Google Maps Satellite Interface - Real Data & Medical Navigation System
+   Exclusively for Hospital & Medical POIs • 100% Free • Zero API Key
+   ========================================================================== */
+
+:root {
+  /* Google Maps Official Design Colors */
+  --gmap-blue: #1A73E8;
+  --gmap-blue-hover: #1557B0;
+  --gmap-blue-light: #E8F0FE;
+
+  --gmap-red: #EA4335;
+  --gmap-red-dark: #C5221F;
+  --gmap-red-light: #FCE8E6;
+
+  --gmap-green: #34A853;
+  --gmap-green-dark: #137333;
+  --gmap-green-light: #E6F4EA;
+
+  --gmap-yellow: #FBBC04;
+
+  /* Surfaces & Neutral Tones */
+  --gmap-surface: #FFFFFF;
+  --gmap-surface-elevated: #FFFFFF;
+  --gmap-border: #DADCE0;
+  --gmap-divider: #E8EAED;
+
+  /* Text Colors */
+  --gmap-text-primary: #202124;
+  --gmap-text-secondary: #5F6368;
+  --gmap-text-muted: #70757A;
+
+  /* Shadows (Google Material Design) */
+  --gmap-shadow-1: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+  --gmap-shadow-2: 0 2px 6px rgba(60, 64, 67, 0.3), 0 1px 2px rgba(60, 64, 67, 0.15);
+  --gmap-shadow-3: 0 4px 12px rgba(60, 64, 67, 0.25), 0 1px 3px rgba(60, 64, 67, 0.15);
+  --gmap-shadow-nav: 0 8px 24px rgba(0, 0, 0, 0.4);
+
+  /* Fonts */
+  --font-gmap: 'Google Sans', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ==========================================================================
+   Reset & Viewport
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--font-gmap);
+  color: var(--gmap-text-primary);
+  background-color: #000000;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Fullscreen Satellite Canvas */
+.full-map {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   Google Maps Top Bar: Floating Search Box + Chips
+   ========================================================================== */
+.gmap-top-bar {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: calc(100vw - 24px);
+  pointer-events: none;
+}
+
+.gmap-top-bar > * {
+  pointer-events: auto;
+}
+
+/* Google Maps Floating Searchbox Card */
+.gmap-searchbox-card {
+  width: 410px;
+  max-width: calc(100vw - 24px);
+  height: 48px;
+  background: var(--gmap-surface);
+  border-radius: 8px;
+  box-shadow: var(--gmap-shadow-2);
+  display: flex;
+  align-items: center;
+  padding: 0 8px 0 12px;
+  transition: box-shadow 0.2s ease;
+}
+
+.gmap-searchbox-card:focus-within {
+  box-shadow: var(--gmap-shadow-3);
+}
+
+.gmap-menu-btn {
+  background: none;
+  border: none;
+  color: var(--gmap-text-secondary);
+  font-size: 1.1rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.gmap-menu-btn:hover {
+  background-color: rgba(60, 64, 67, 0.08);
+}
+
+.gmap-search-input-wrap {
+  flex: 1;
+  padding: 0 8px;
+}
+
+.gmap-search-input-wrap input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--gmap-text-primary);
+}
+
+.gmap-search-input-wrap input::placeholder {
+  color: var(--gmap-text-muted);
+}
+
+.gmap-search-btn,
+.gmap-clear-btn {
+  background: none;
+  border: none;
+  color: var(--gmap-text-secondary);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.gmap-search-btn:hover,
+.gmap-clear-btn:hover {
+  background-color: rgba(60, 64, 67, 0.08);
+}
+
+.search-divider {
+  width: 1px;
+  height: 24px;
+  background-color: var(--gmap-divider);
+  margin: 0 4px;
+}
+
+.gmap-directions-btn {
+  background: none;
+  border: none;
+  color: var(--gmap-blue);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.15rem;
+  transition: background-color 0.15s;
+}
+
+.gmap-directions-btn:hover {
+  background-color: var(--gmap-blue-light);
+}
+
+/* Medical Exclusive Active Filter Banner */
+.medical-exclusive-ribbon {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #E2E8F0;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 11.5px;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  width: fit-content;
+}
+
+.medical-exclusive-ribbon i {
+  color: #38BDF8;
+}
+
+.medical-exclusive-ribbon strong {
+  color: #4ADE80;
+}
+
+.ribbon-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4ADE80;
+  animation: pulse-ring 1.8s infinite;
+}
+
+/* Horizontal Category Chips (Google Maps Style) */
+.gmap-chips-bar {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+  max-width: 800px;
+}
+
+.gmap-chips-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.gmap-chip {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 14px;
+  height: 32px;
+  border-radius: 16px;
+  border: 1px solid var(--gmap-border);
+  background: var(--gmap-surface);
+  color: var(--gmap-text-primary);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.15);
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.gmap-chip:hover {
+  background-color: #F8F9FA;
+  border-color: #C6C8CC;
+}
+
+.gmap-chip.active {
+  background-color: var(--gmap-blue-light);
+  color: var(--gmap-blue);
+  border-color: #B4D5FE;
+  font-weight: 600;
+}
+
+.emergency-chip {
+  color: var(--gmap-red);
+}
+
+.emergency-chip.active {
+  background-color: var(--gmap-red-light);
+  color: var(--gmap-red);
+  border-color: #FAD2CF;
+}
+
+.emergency-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--gmap-red);
+  animation: pulse-ring 1.6s infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.5; }
+  100% { transform: scale(0.95); opacity: 1; }
+}
+
+.osm-fetch-chip {
+  background: #1E293B;
+  color: #F8FAFC;
+  border-color: #334155;
+}
+
+.osm-fetch-chip:hover {
+  background: #0F172A;
+  color: #38BDF8;
+}
+
+/* ==========================================================================
+   Left Sliding Side Panel (Medical Directory)
+   ========================================================================== */
+.gmap-side-panel {
+  position: absolute;
+  top: 70px;
+  left: 12px;
+  width: 410px;
+  max-width: calc(100vw - 24px);
+  height: calc(100vh - 84px);
+  background: var(--gmap-surface);
+  border-radius: 8px;
+  box-shadow: var(--gmap-shadow-3);
+  z-index: 450;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-430px); /* Hidden by default until toggled */
+}
+
+.gmap-side-panel.open {
+  transform: translateX(0);
+}
+
+.panel-header-tab {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--gmap-divider);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.panel-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--gmap-text-primary);
+}
+
+.panel-subtitle {
+  font-size: 12px;
+  color: var(--gmap-green-dark);
+  font-weight: 500;
+}
+
+.panel-close-btn {
+  background: none;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: var(--gmap-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.panel-close-btn:hover {
+  background-color: rgba(60, 64, 67, 0.08);
+}
+
+/* SOS Toll-free banner */
+.sos-banner {
+  margin: 10px 14px;
+  background: linear-gradient(135deg, #FEF2F2 0%, #FEE2E2 100%);
+  border: 1px solid #FECACA;
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sos-icon-box {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--gmap-red);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.sos-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.sos-text strong {
+  font-size: 13px;
+  color: #991B1B;
+}
+
+.sos-text span {
+  font-size: 11px;
+  color: #B91C1C;
+}
+
+.sos-btn {
+  background: var(--gmap-red);
+  color: white;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 6px rgba(234, 67, 53, 0.35);
+}
+
+.sos-btn:hover {
+  background: var(--gmap-red-dark);
+}
+
+/* Facility Feed */
+.facility-feed {
+  flex: 1;
+  overflow-y: auto;
+  padding: 6px 14px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.feed-item-card {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--gmap-border);
+  background: #FFFFFF;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: all 0.15s ease;
+}
+
+.feed-item-card:hover {
+  box-shadow: var(--gmap-shadow-1);
+  border-color: #B4D5FE;
+}
+
+.feed-item-card.active {
+  background: var(--gmap-blue-light);
+  border-color: var(--gmap-blue);
+}
+
+.feed-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.feed-item-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--gmap-text-primary);
+  line-height: 1.25;
+}
+
+.feed-tag {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+.feed-tag.hospital {
+  background: var(--gmap-red-light);
+  color: var(--gmap-red-dark);
+}
+
+.feed-tag.clinic {
+  background: var(--gmap-blue-light);
+  color: var(--gmap-blue);
+}
+
+.feed-tag.pharmacy {
+  background: var(--gmap-green-light);
+  color: var(--gmap-green-dark);
+}
+
+.feed-tag.bloodbank {
+  background: #FEE2E2;
+  color: #991B1B;
+}
+
+.feed-rating-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--gmap-text-secondary);
+}
+
+.feed-rating-row i {
+  color: var(--gmap-yellow);
+  font-size: 11px;
+}
+
+.feed-address {
+  font-size: 12px;
+  color: var(--gmap-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.feed-footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  padding-top: 4px;
+  border-top: 1px dashed var(--gmap-divider);
+}
+
+.feed-distance {
+  color: var(--gmap-blue);
+  font-weight: 600;
+}
+
+.feed-status-open {
+  color: var(--gmap-green-dark);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Google Maps Facility Detail Card (Left Sheet on Marker Click)
+   ========================================================================== */
+.gmap-detail-card {
+  position: absolute;
+  top: 70px;
+  left: 12px;
+  width: 395px;
+  max-width: calc(100vw - 24px);
+  max-height: calc(100vh - 84px);
+  background: var(--gmap-surface);
+  border-radius: 8px;
+  box-shadow: var(--gmap-shadow-3);
+  z-index: 550;
+  overflow-y: auto;
+  padding: 20px;
+  animation: slideFadeIn 0.2s cubic-bezier(0.2, 0, 0, 1);
+}
+
+@keyframes slideFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.detail-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: #F1F3F4;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: var(--gmap-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detail-close-btn:hover {
+  background: #E8EAED;
+}
+
+.detail-badge-pill {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--gmap-blue);
+  margin-bottom: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.detail-name {
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--gmap-text-primary);
+  line-height: 1.25;
+  margin-bottom: 6px;
+  padding-right: 30px;
+}
+
+.detail-rating-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--gmap-text-secondary);
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.rating-number {
+  font-weight: 700;
+  color: var(--gmap-text-primary);
+}
+
+.stars i {
+  color: var(--gmap-yellow);
+  font-size: 12px;
+}
+
+.dot-separator {
+  color: var(--gmap-text-muted);
+}
+
+/* Action Buttons Bar (Google Maps Style) */
+.detail-actions-bar {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.gmap-action-btn {
+  height: 38px;
+  border-radius: 20px;
+  border: 1px solid var(--gmap-border);
+  background: var(--gmap-surface);
+  color: var(--gmap-blue);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.gmap-action-btn:hover {
+  background-color: var(--gmap-blue-light);
+}
+
+.gmap-action-btn.primary-action {
+  background: var(--gmap-blue);
+  color: white;
+  border: none;
+  box-shadow: 0 1px 3px rgba(26, 115, 232, 0.4);
+}
+
+.gmap-action-btn.primary-action:hover {
+  background: var(--gmap-blue-hover);
+}
+
+/* Hospital Status Strip */
+.detail-status-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 18px;
+  padding: 10px 12px;
+  background: #F8F9FA;
+  border-radius: 8px;
+  border: 1px solid var(--gmap-divider);
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.status-item i {
+  font-size: 1.3rem;
+  color: var(--gmap-green-dark);
+}
+
+.status-item.icu-status i {
+  color: var(--gmap-red);
+}
+
+.status-item strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gmap-text-primary);
+  line-height: 1.1;
+}
+
+.status-item span {
+  font-size: 11px;
+  color: var(--gmap-text-secondary);
+}
+
+/* Info Rows */
+.detail-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-top: 1px solid var(--gmap-divider);
+  padding-top: 16px;
+}
+
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 13.5px;
+  color: var(--gmap-text-primary);
+  line-height: 1.4;
+}
+
+.info-icon {
+  font-size: 15px;
+  color: var(--gmap-text-secondary);
+  width: 18px;
+  margin-top: 2px;
+}
+
+.specs-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.spec-pill {
+  font-size: 12px;
+  font-weight: 500;
+  background: #F1F3F4;
+  color: var(--gmap-text-primary);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   Google Maps Authentic Pins
+   ========================================================================== */
+.gmap-pin-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  width: 160px;
+}
+
+/* Classic Google Maps Teardrop Shape */
+.gmap-teardrop-pin {
+  width: 34px;
+  height: 44px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.6));
+}
+
+.gmap-pin-container:hover .gmap-teardrop-pin {
+  transform: scale(1.18) translateY(-4px);
+}
+
+.gmap-pin-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.pin-icon-glyph {
+  position: absolute;
+  top: 9px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #FFFFFF;
+  font-size: 12px;
+  pointer-events: none;
+}
+
+/* Google Maps High-Contrast Medical Name Badge */
+.gmap-pin-name-badge {
+  margin-top: 3px;
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-family: var(--font-gmap);
+  font-size: 11px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+  pointer-events: none;
+  max-width: 155px;
+}
+
+.gmap-pin-name-badge .badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.gmap-pin-name-badge .badge-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gmap-pin-name-badge .badge-icu {
+  background: var(--gmap-red);
+  color: white;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 1px 4px;
+  border-radius: 4px;
+  margin-left: 2px;
+  flex-shrink: 0;
+}
+
+/* Pulsing radar for 24/7 Emergency hospitals */
+.gmap-emergency-radar {
+  position: absolute;
+  top: 17px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(234, 67, 53, 0.35);
+  animation: radar-wave 2s infinite ease-out;
+  pointer-events: none;
+}
+
+@keyframes radar-wave {
+  0% { transform: translate(-50%, -50%) scale(0.6); opacity: 0.9; }
+  100% { transform: translate(-50%, -50%) scale(1.8); opacity: 0; }
+}
+
+/* Ambulance Live Marker */
+.ambulance-realtime-marker {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 3px solid var(--gmap-blue);
+  box-shadow: 0 0 16px rgba(26, 115, 232, 0.6), 0 4px 10px rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gmap-red);
+  font-size: 1.35rem;
+}
+
+/* ==========================================================================
+   Google Maps Turn-by-Turn Driving Navigation HUD
+   ========================================================================== */
+.gmap-nav-hud {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 28px);
+  max-width: 580px;
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: navSlideDown 0.3s ease-out;
+}
+
+@keyframes navSlideDown {
+  from { transform: translate(-50%, -30px); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+/* Authentic Google Maps Green Navigation Banner */
+.nav-green-card {
+  background: #0D652D; /* Google Maps driving green */
+  color: #FFFFFF;
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: var(--gmap-shadow-nav);
+}
+
+.nav-maneuver-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.nav-text-block {
+  flex: 1;
+}
+
+.nav-instruction {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.nav-subinstruction {
+  font-size: 0.85rem;
+  color: #C8E6C9;
+  margin-top: 3px;
+}
+
+.nav-voice-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.nav-voice-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* Bottom Trip Bar */
+.nav-bottom-card {
+  background: var(--gmap-surface);
+  border-radius: 28px;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--gmap-shadow-3);
+}
+
+.trip-stats {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.trip-time {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #137333;
+}
+
+.trip-meta {
+  display: flex;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: var(--gmap-text-secondary);
+}
+
+.trip-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-recenter-btn {
+  background: #F1F3F4;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: var(--gmap-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-exit-btn {
+  background: var(--gmap-red);
+  color: white;
+  border: none;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-exit-btn:hover {
+  background: var(--gmap-red-dark);
+}
+
+/* ==========================================================================
+   Google Maps Bottom-Left Layer Switcher (Satellite ⇄ Default)
+   ========================================================================== */
+.gmap-layer-thumbnail {
+  position: absolute;
+  bottom: 24px;
+  left: 14px;
+  width: 58px;
+  height: 58px;
+  border-radius: 8px;
+  border: 2px solid #FFFFFF;
+  box-shadow: var(--gmap-shadow-2);
+  cursor: pointer;
+  z-index: 400;
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.gmap-layer-thumbnail:hover {
+  transform: scale(1.08);
+  box-shadow: var(--gmap-shadow-3);
+}
+
+.thumb-img-wrapper {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 3px;
+  background-color: #2F3E46;
+}
+
+.thumb-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: white;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 1px 5px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* ==========================================================================
+   Google Maps Bottom-Right Control Stack
+   ========================================================================== */
+.gmap-controls-stack {
+  position: absolute;
+  bottom: 24px;
+  right: 14px;
+  z-index: 400;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.gmap-control-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: var(--gmap-surface);
+  border: none;
+  box-shadow: var(--gmap-shadow-2);
+  color: var(--gmap-text-secondary);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.gmap-control-btn:hover {
+  background-color: #F8F9FA;
+  color: var(--gmap-text-primary);
+}
+
+.gmap-zoom-group {
+  background: var(--gmap-surface);
+  border-radius: 8px;
+  box-shadow: var(--gmap-shadow-2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.zoom-btn {
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.zoom-divider {
+  width: 24px;
+  height: 1px;
+  background: var(--gmap-divider);
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   Responsive Mobile Behavior
+   ========================================================================== */
+@media (max-width: 600px) {
+  .gmap-top-bar {
+    top: 8px;
+    left: 8px;
+    width: calc(100vw - 16px);
+  }
+
+  .gmap-searchbox-card {
+    width: 100%;
+  }
+
+  .gmap-side-panel,
+  .gmap-detail-card {
+    width: calc(100vw - 16px);
+    left: 8px;
+    top: 60px;
+    max-height: 70vh;
+  }
+
+  .gmap-layer-thumbnail {
+    bottom: 16px;
+    left: 8px;
+  }
+
+  .gmap-controls-stack {
+    bottom: 16px;
+    right: 8px;
+  }
+}

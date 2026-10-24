@@ -1,0 +1,58 @@
+{
+  "record_id": "mock-rx-001",
+  "doc_type": "prescription",
+  "doc_date": "2024-12-10",
+  "language": "en",
+  "patient_name_present": true,
+  "medicines": [
+    {
+      "name_raw": "Metformin 500mg",
+      "generic": "Metformin",
+      "strength": "500 mg",
+      "schedule_raw": "1-0-1",
+      "schedule_parsed": ["morning", "night"],
+      "food_instruction": "after_food",
+      "duration_days": 90,
+      "confidence": 0.93,
+      "bbox": [0.15, 0.22, 0.35, 0.12]
+    },
+    {
+      "name_raw": "Dolo 650",
+      "generic": "Paracetamol",
+      "strength": "650 mg",
+      "schedule_raw": "1-0-1",
+      "schedule_parsed": ["morning", "night"],
+      "food_instruction": "after_food",
+      "duration_days": 5,
+      "confidence": 0.87,
+      "bbox": [0.15, 0.38, 0.3, 0.1]
+    },
+    {
+      "name_raw": "Vitamin D3 60000 IU",
+      "generic": "Cholecalciferol",
+      "strength": "60000 IU",
+      "schedule_raw": "Weekly",
+      "schedule_parsed": ["morning"],
+      "food_instruction": "after_food",
+      "duration_days": 84,
+      "confidence": 0.72,
+      "bbox": [0.15, 0.52, 0.4, 0.1]
+    }
+  ],
+  "tests": [],
+  "diagnoses": [
+    {
+      "text": "Type 2 Diabetes Mellitus",
+      "confidence": 0.8
+    },
+    {
+      "text": "Vitamin D Deficiency",
+      "confidence": 0.75
+    }
+  ],
+  "summary_en": "Prescription for Type 2 Diabetes management: Metformin 500mg twice daily after food for 90 days. Dolo 650 for fever/pain as needed for 5 days. Vitamin D3 60000 IU once weekly after food for 12 weeks for deficiency correction.",
+  "summary_ta": "Type 2 Diabetes மேலாண்மைக்கான விதி: மெட்ஃபார்மின் 500mg உணவுக்கு பின் நாளில் இரண்டு முறை 90 நாட்கள். டோலோ 650 காய்ச்சல்/வலிக்கு தேவையானவாறு 5 நாட்கள். வைட்டமின் D3 60000 IU வாரத்திற்கு ஒரு முறை உணவுக்கு பின் 12 வாரங்கள் குறைபாட்டு திருத்தத்திற்கு.",
+  "needs_review": ["medicines[2]"],
+  "disclaimer": "This is AI-generated information to help you understand your records. It is not a diagnosis or medical advice. Please consult your doctor.",
+  "error": null
+}

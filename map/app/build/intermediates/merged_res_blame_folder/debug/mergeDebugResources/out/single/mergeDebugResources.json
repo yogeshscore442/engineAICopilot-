@@ -1,0 +1,134 @@
+[
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_roundabout.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_roundabout.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_map.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_map.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_traffic.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_traffic.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_hospital.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_hospital.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_volume_up.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_volume_up.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_flag.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_flag.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_arrow_upward.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_arrow_upward.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_u_turn.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_u_turn.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_medication.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_medication.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_turn_left.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_turn_left.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_pill.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_pill.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_google_maps.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_google_maps.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_turn_slight_right.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_turn_slight_right.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_my_location.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_my_location.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_emergency.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_emergency.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_navigation.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_navigation.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_call.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_call.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_timer.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_timer.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_exit_roundabout.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_exit_roundabout.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_turn_right.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_turn_right.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_turn_slight_left.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_turn_slight_left.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_phone.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_phone.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_medical_cross.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_medical_cross.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/xml_data_extraction_rules.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_stethoscope.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_stethoscope.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_pharmacy.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_pharmacy.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_medical_services.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_medical_services.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_route.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_route.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_location_on.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_location_on.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_volume_off.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_volume_off.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/xml_backup_rules.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_close.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_close.xml"
+    },
+    {
+        "merged": "com.medical.navigation.app-debug-68:/drawable_ic_arrow_forward.xml.flat",
+        "source": "com.medical.navigation.app-main-70:/drawable/ic_arrow_forward.xml"
+    }
+]

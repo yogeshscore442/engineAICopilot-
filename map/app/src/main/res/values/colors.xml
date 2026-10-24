@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Calm Care Design System Palette -->
+    <color name="primary_teal">#FF0FA397</color>
+    <color name="primary_dark_teal">#FF0D9488</color>
+    <color name="primary_light_tint">#FFEEF7FB</color>
+    <color name="accent_sky_blue">#FF3B9BF0</color>
+    <color name="emergency_crimson">#FFE5484D</color>
+    <color name="success_green">#FF22A06B</color>
+    <color name="warning_amber">#FFF5A524</color>
+    <color name="glass_card_surface">#EEFFFFFF</color>
+    <color name="glass_card_border">#66E2E8F0</color>
+    <color name="navigation_hud_background">#F00F172A</color>
+    <color name="deep_slate">#FF0F172A</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="transparent">#00000000</color>
+    
+    <!-- Semantic Colors -->
+    <color name="surface_container_high">#FFF1F5F9</color>
+    <color name="on_surface">#FF0F172A</color>
+    <color name="on_surface_variant">#FF475569</color>
+    <color name="outline">#FFE2E8F0</color>
+    <color name="outline_variant">#FFCBD5E1</color>
+</resources>
